@@ -1,0 +1,433 @@
+FORM NO. 16
+[See rule 31(1)(a)]
+Certificate under Section 203 of the Income-tax Act, 1961 for tax deducted at source on salary paid to an employee under section 192 or pension/interest income
+of specified senior citizen under section 194P
+Name and address of the Employer/Specified Bank
+TERRALOGIC SOFTWARE SOLUTIONS PRIVATE LIMITED
+D.No.69, KMJ ATELIER, HOSUR MAIN ROAD,
+RUPENA AGRAHARA, BANGALORE-68 - 560034
+Karnataka
++(91)80-41605111
+ravalipriya.k@paxterrasolutions.comName and address of the Employee/Specified senior citizen
+KAMAL TEJA MEDA
+6-49/2A, KOLLAMITTA, SULLURUPET, SULLURUPET, NELLORE
+- 524121 Andhra Pradesh
+PAN of the Deductor
+AAECP5573ETAN of the Deductor
+BLRP08742GPAN of the
+Employee/Specified senior
+citizen
+GGRPM9910E
+Assessment Year
+2025-26CIT (TDS)
+The Commissioner of Income Tax (TDS)
+Room No. 59, H.M.T. Bhawan, 4th Floor, Bellary Road ,
+Ganganagar, Bangalore - 560032Period with the Employer
+To
+31-Mar-2025From
+01-Apr-2024
+Summary of amount paid/credited and tax deducted at source thereon in respect of the employee
+Quarter(s)Receipt Numbers of original
+quarterly statements of TDS
+under sub-section (3) of
+Section 200Amount of tax deducted
+(Rs.)Amount of tax deposited / remitted
+(Rs.) Amount paid/credited
+Q3 FXCCFRKU 0.00 0.00 98547.00
+Q4 FXCINHQP 0.00 0.00 121583.00
+Total (Rs.) 0.00 0.00 220130.00
+Sl. No.Tax Deposited in respect of the
+deductee
+(Rs.)Book Identification Number (BIN)
+Receipt Numbers of Form
+No. 24GDDO serial number in Form no.
+24GDate of transfer voucher
+(dd/mm/yyyy)Status of matching
+with Form no. 24G
+Total (Rs.)
+Sl. No.Tax Deposited in respect of the
+deductee
+(Rs.)Challan Identification Number (CIN)
+BSR Code of the Bank
+BranchDate on which Tax deposited
+(dd/mm/yyyy)Challan Serial Number Status of matching with
+OLTAS*
+1 0.00 - 07-11-2024 - F
+2 0.00 - 07-12-2024 - F
+3 0.00 - 07-01-2025 - F
+4 0.00 - 07-02-2025 - F
+5 0.00 - 07-03-2025 - F
+6 0.00 - 25-04-2025 - FPART A
+Certificate No. UUDDAEA Last updated on 28-May-2025
+Employee Reference No. provided by the
+Employer/Pension Payment order no. provided
+by the Employer (If available)
+I. DETAILS OF TAX DEDUCTED AND DEPOSITED IN THE CENTRAL GOVERNMENT ACCOUNT THROUGH BOOK ADJUSTMENT
+(The deductor to provide payment wise details of tax deducted and deposited with respect to the deductee)
+II. DETAILS OF TAX DEDUCTED AND DEPOSITED IN THE CENTRAL GOVERNMENT ACCOUNT THROUGH CHALLAN
+(The deductor to provide payment wise details of tax deducted and deposited with respect to the deductee)
+Page 1 of  2
+Certificate Number: UUDDAEA TAN of Employer: BLRP08742G PAN of Employee: GGRPM9910E Assessment Year: 2025-26
+I,  RAVALIPRIYA KASAVARAPU, son / daughter of SURA SREERAMA MURTHY KASAVARAPU working in the capacity of DIRECTOR (designation) do hereby certify
+that a sum of Rs. 0.00 [Rs. Zero Only (in words)] has been deducted and a sum of Rs. 0.00 [Rs. Zero Only] has been deposited to the credit of the Central
+Government. I further certify that the information given above is true, complete and correct and is based on the books of account, documents, TDS statements, TDS
+deposited and other available records.Verification
+Place
+Date (Signature of person responsible for deduction of Tax)BANGALORE
+12-Jun-2025
+DIRECTOR Designation: Full Name: RAVALIPRIYA  KASAVARAPU
+Notes:
+1. Part B (Annexure) of the certificate in Form No.16 shall be issued by the employer.
+2. If an assessee is employed under one employer during the year, Part 'A' of the certificate in Form No.16 issued for the quarter ending on 31st March of the financial year shall contain the details
+of tax deducted and deposited for all the quarters of the financial year.
+3. If an assessee is employed under more than one employer during the year, each of the employers shall issue Part A of the certificate in Form No.16 pertaining to the period for which such
+assessee was employed with each of the employers. Part B (Annexure) of the certificate in Form No. 16 may be issued by each of the employers or the last employer at the option of the assessee.
+4. To update PAN details in Income Tax Department database, apply for 'PAN change request' through NSDL or UTITSL.Total (Rs.) 0.00
+Legend used in Form 16
+* Status of matching with OLTAS
+Legend Description Definition
+U UnmatchedDeductors have not deposited taxes or have furnished incorrect particulars of tax payment. Final credit will be reflected only when payment
+details in bank match with details of deposit in TDS / TCS statement
+P ProvisionalProvisional tax credit is effected only for TDS / TCS Statements filed by Government deductors."P" status will be changed to Final (F) on
+verification of payment details submitted by Pay and Accounts Officer (PAO)
+O OverbookedPayment details of TDS / TCS deposited in bank by deductor have matched with details mentioned in the TDS / TCS statement but the
+amount is over claimed in the statement. Final (F) credit will be reflected only when deductor reduces claimed amount in the statement or
+makes new payment for excess amount claimed in the statementF FinalIn case of non-government deductors, payment details of TDS / TCS deposited in bank by deductor have matched with the payment details
+mentioned in the TDS / TCS statement filed by the deductors. In case of government deductors, details of TDS / TCS booked in Government
+account have been verified by Pay & Accounts Officer (PAO)
+Page 2 of  2
+FORM NO. 16
+Certificate under section 203 of the Income-tax Act, 1961 for tax deducted at source on salary paid to an employee under section 192 or pension/interest income
+of specified senior citizen under section 194P
+Name and address of the Employer/Specified Bank
+TERRALOGIC SOFTWARE SOLUTIONS PRIVATE LIMITED
+D.No.69, KMJ ATELIER, HOSUR MAIN ROAD,
+RUPENA AGRAHARA, BANGALORE-68 - 560034
+Karnataka
++(91)80-41605111
+ravalipriya.k@paxterrasolutions.comName and address of the Employee/Specified senior citizen
+KAMAL TEJA MEDA
+6-49/2A, KOLLAMITTA, SULLURUPET, SULLURUPET, NELLORE
+- 524121 Andhra Pradesh
+PAN of the Deductor
+AAECP5573ETAN of the Deductor
+BLRP08742GPAN of the Employee/Specified senior citizen
+GGRPM9910E
+Assessment Year
+2025-26CIT (TDS)
+The Commissioner of Income Tax (TDS)
+Room No. 59, H.M.T. Bhawan, 4th Floor, Bellary Road ,
+Ganganagar, Bangalore - 560032Period with the Employer
+To
+31-Mar-2025From
+01-Apr-2024
+Annexure  -  I
+Rs. Rs. 1. Gross Salary
+Salary as per provisions contained in section 17(1)(a) 408277.00
+(b) 0.00
+(c)Profits in lieu of salary under section 17(3) (as per Form No.
+12BA, wherever applicable)0.00
+(d)Total 408277.00
+(e)Reported total amount of salary received from other employer(s) 0.00
+2.Less: Allowances to the extent exempt under section 10
+0.00 Travel concession or assistance under section 10(5)(a)
+0.00 Death-cum-retirement gratuity under section 10(10)(b)
+Cash equivalent of leave salary encashment under section 10
+(10AA)
+House rent allowance under section 10(13A)Commuted value of pension under section 10(10A)(c)
+(d)0.00
+(e) 0.000.00Certificate No. Last updated on 28-May-2025PART B
+UUDDAEA
+Details of Salary Paid and any other income and tax deducted
+Value of perquisites under section 17(2) (as per Form No. 12BA,
+wherever applicable)Whether opting out of taxation u/s 115BAC(1A)? No
+(f)Other special allowances under section 10(14) 0.00A
+Page 1 of 4
+Certificate Number: UUDDAEA TAN of Employer: BLRP08742G PAN of Employee: GGRPM9910E Assessment Year: 2025-26
+(h)(g)
+Total amount of any other exemption under section 10
+Total amount of exemption claimed under section 10
+[2(a)+2(b)+2(c)+2(d)+2(e)+2(f)+2(h)]0.00
+0.00 (i)
+408277.00 3.Total amount of salary received from current employer
+[1(d)-2(i)]
+4.Less: Deductions under section 16
+0.00 Entertainment allowance under section 16(ii)(a) 75000.00
+(b)
+Tax on employment under section 16(iii) 0.00 (c)Standard deduction under section 16(ia)
+Income chargeable under the head "Salaries" [(3+1(e)-5]Total amount of deductions under section 16 [4(a)+4(b)+4(c)]
+Add: Any other income reported by the employee under as per section 192 (2B)75000.00
+333277.00 6.5.
+7.
+Income under the head Other Sources offered for TDS(a) 0.00
+(b)Income (or admissible loss) from house property reported by
+employee offered for TDS
+0.00
+8.
+10.333277.00 Gross total income (6+8)9.
+Deductions under Chapter VI-ATotal amount of other income reported by the employee
+[7(a)+7(b)]0.00
+Deduction in respect of contribution to certain pension funds
+under section 80CCC
+0.00
+Deductions in respect of amount paid/deposited to notified
+pension scheme under section 80CCD (1B)(a)
+0.00(b)
+Total deduction under section 80C, 80CCC and 80CCD(1)(c)
+(g)0.00
+Deduction in respect of contribution by Employer to pension
+scheme under section 80CCD (2)Deduction in respect of life insurance premia, contributions to
+provident fund etc. under section 80C
+0.00
+(f)(d)
+Deduction in respect of health insurance premia under section
+80D0.00
+Deduction in respect of contribution by taxpayer to pension
+scheme under section 80CCD (1)
+0.00(e)0.00        Gross Amount Deductible Amount
+0.00
+0.00
+0.00
+0.00
+0.000.000.00Amount of any other exemption under section 10
+[Note: Break-up to be filled and signed  by employer in the table
+provide at the bottom of this form]
+Page 2 of 4
+Certificate Number: UUDDAEA TAN of Employer: BLRP08742G PAN of Employee: GGRPM9910E Assessment Year: 2025-26
+Total Deduction in respect of donations to certain funds,
+charitable institutions, etc. under section 80G
+(l)(h) 0.00
+0.000.00 (k)
+Deduction in respect of interest on deposits in savings account
+under section 80TTADeduction in respect of interest on loan taken for higher
+education under section 80E
+Total of amount deductible under any other provision(s) of
+Chapter VI-A(n) 0.00(m)
+Aggregate of deductible amount under Chapter VI-A
+[10(d)+10(e)+10(f)+10(g)+10(h)+10(i)+10(j)+10(k)+10(l)+10(n)]
+Tax on total income0.00 11.
+13.12.
+1664.00333277.00 Total taxable income (9-11)
+Surcharge, wherever applicableRebate under section 87A, if applicable 1664.00 14.
+15. 0.00
+0.0016. 0.00
+0.00
+Less: Relief under section 89 (attach details)17.
+18.Tax payable (13+15+16-14)Health and education cess0.00
+0.00 0.00
+0.00 0.00Gross
+AmountQualifying
+AmountDeductible
+Amount
+0.00 0.00Amount Deductible under any other provision (s) of Chapter VI-A
+[Note: Break-up to be filled and signed  by employer in the table
+provide at the bottom of this form](i)
+(j)
+Net tax payable (17-18-19-20)21. 0.00Deduction in respect of contribution by the employee to Agnipath
+Scheme under section 80CCH
+Deduction in respect of contribution by the Central Government
+to Agnipath Scheme under section 80CCH0.00
+0.000.00
+0.00
+Less: Tax collected at source as per Form No. 12BAA submitted
+under provisions of section 192(2B)Less: Tax deducted at source as per Form No. 12BAA submitted
+under provisions of section 192(2B)
+0.0019.
+20.
+Place
+DateI,  RAVALIPRIYA KASAVARAPU, son/daughter of SURA SREERAMA MURTHY KASAVARAPU .Working in the capacity of
+DIRECTOR (Designation) do hereby certify that the information given above is true, complete and correct and is based on the books of
+account, documents, TDS statements, and other available records.
+12-Jun-2025BANGALORE
+Full
+Name:Verification
+(Signature of person responsible for deduction of tax)
+RAVALIPRIYA  KASAVARAPU
+Page 3 of 4
+Certificate Number: UUDDAEA TAN of Employer: BLRP08742G PAN of Employee: GGRPM9910E Assessment Year: 2025-26
+Deductible  Amount
+Qualifying Amount Sl.
+No.
+Gross AmountParticular's of Amount deductible under
+any other provision(s) of Chapter VIASl.
+No.Particular's of Amount for any other
+exemption under section 10
+Qualifying Amount
+Deductible  Amount2. (f) Break up for ‘Amount of any other exemption under section 10’ to be filled in the table below
+10(k). Break up for ‘Amount deductible under any other provision(s) of Chapter VIA ‘to be filled in the table below
+Gross Amount
+Rs. Rs. Rs.
+BANGALORE (Signature of person responsible for deduction of
+tax)
+Full
+Name:Date 12-Jun-2025 RAVALIPRIYA  KASAVARAPUPlace1.
+2..
+3.
+4.
+5.
+6.
+1.
+2.
+3.
+4.
+5.
+6.Rs.
+Rs. Rs. Rs. Rs.
+Page 4 of 4
+Less: Allowances to the extent exempt under section 10 - 2(f)PART B [2(f) and 10(k) details]
+1.Name : PAN : GGRPM9910E AY : 2025-2026 Meda Kamal Teja
+ 
+ 
+Gross
+Amount 
+ Total amount of any other exemption under section 10
+  
+  
+ 
+2.   
+ Deductions under Chapter VI-A as per 10(k)
+ Qualifying
+AmountDeductible
+Amount
+(a)Amount deductible under any other provision(s) of Chapter VI-A    
+ 
+ Total of amount deductible under any other provision(s) of
+Chapter VI-A0
+ 0
+ 0
+  
+ 
+ 
+ 
+ 
+Rs. 
+ 
+ 
+ 
+ 
+Rs. 
+ 
+ 
+ 
+ 
+Rs.
+(Signature of person responsible for deduction of tax)Place
+DateBENGALURU
+20/06/20251 Tax payable as per Part-B 0Tax Deducted Summary
+Sl. No.(Summary of Tax Payable and Tax Deducted Information)
+Particulars Amount
+2 Tax Deducted at Current Employment 0
+4 Total Tax Deducted (2 + 3) 03 Tax Deducted at Previous Employment 0
+5 Net Tax Payable / (Refundable) (1 - 4) 0
+FORM No. 12 BA
+[See rule 26A(2) (b)]
+Statement showing particulars of perquisites, other fringe benefits or
+amenities and profits in lieu of salary with value thereof
+1 Name and address of Employer: TERRALOGIC SOFTWARE SOLUTIONS PRIVATE LIMITED
+D.No.69,KMJ ATELIER
+2 TAN: BLRP08742G
+3 TDS Assessment Range of the employer:
+4 Name, designation and PAN of employee: Meda Kamal Teja,Software engineer l,GGRPM9910E
+5 Is the employee a director or a person with 
+No substantial interest in the company (where 
+the employer is a company):
+6 Income under the head “Salaries” of the 408277
+employee ( other than from perquisites):
+7 Financial Year: 2024 - 2025
+8 Valuation of Perquisites:
+Sl Nature of perquisite Value of Amount, if any Amount, if any 
+ No. (See rule 3) perquisite recovered  perquisite
+as  per from the chargeable
+rules employee   to tax 
+Col.(3) – Col.(4)
+(Rs.) (Rs.) (Rs.)
+(1) (2) (3) (4) (5)
+1 Accommodation
+2 Cars/Other automotive
+3 Sweeper, gardener, watchman or personal 
+4 Gas, electricity, water
+5 Interest free or concessional loans
+6 Holiday expensesattendant
+7 Free or concessional travel
+8 Free meals
+9 Free education
+10 Gifts, vouchers, etc.
+11 Credit card expenses
+12 Club expenses
+13 Use of movable assets by employees
+14 Transfer of assets to employees
+15 Value of any other benefit / amenity 
+16 Stock options ( non-qualified options)
+17 Other benefits or amenities
+18 Total value of perquisites
+19 Total value of Profits in lieu of salary as / service / privilege
+per section 17(3)Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+NilNil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+NilNil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+Nil
+NilHOSUR MAIN ROAD
+RUPENA AGRAHARA
+BANGALORE-68
+KARNATAKA - 560034
+9 Details of tax:
+(a)Tax deducted from salary of the employee under section 192 (1)
+(b)Tax paid by employer on behalf of the employee under section 192(1A)
+(c)Total tax paid
+(d)Date of payment into Government treasury
+Declaration by Employer
+I RAVALI PRIYA KASAVARAPU daughter  of K S S MURTHY working as DIRECTOR  (designation) do hereby declare on behalf of
+TERRALOGIC SOFTWARE SOLUTIONS PRIVATE LIMITED (name of the employer) that the information given above is based on the books of
+account, documents and other relevant records or information available with us and the details of value of each such perquisite are in accordance
+with section 17 and rules framed there under and that such information is true and correct.
+Signature of person responsible for deduction of tax Place :
+Date :BENGALURU
+20/06/2025
+Full Name : 
+Designation : RAVALI PRIYA KASAVARAPU
+DIRECTORNil
+Nil
+Nil

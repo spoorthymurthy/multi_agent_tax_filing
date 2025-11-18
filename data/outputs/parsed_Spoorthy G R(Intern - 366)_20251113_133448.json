@@ -1,0 +1,29 @@
+{
+  "document_type": "Payslip",
+  "meta": {
+    "file_name": "Spoorthy G R(Intern - 366)",
+    "processed_on": "20251113_133448"
+  },
+  "extracted_fields": {
+    "name": "EarningsD.No.",
+    "pan": null,
+    "assessment_year": "2025-26",
+    "employer_or_bank": null,
+    "income_components": {
+      "Gross Salary": 15000.0,
+      "Net Salary": 13087.0,
+      "Standard Deduction": 0.0,
+      "Taxable Income": 0.0,
+      "Tax Payable": 0.0
+    },
+    "deductions": {
+      "Total Deductions": 1913.0,
+      "breakdown": {}
+    },
+    "tds_amount": 0.0,
+    "period": {
+      "from": null,
+      "to": null
+    }
+  }
+}

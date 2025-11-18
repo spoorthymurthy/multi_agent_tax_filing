@@ -1,0 +1,23 @@
+{
+    "insights": [
+        "Taxpayer's name is not provided, which is a mandatory field.",
+        "Assessment year is marked as \"UNKNOWNAY\", which is incorrect.",
+        "Taxable Income is calculated as `-2.0`, which is incorrect.",
+        "Breakdown of deductions is not provided.",
+        "Final tax is calculated as `0.0`, which is incorrect.",
+        "Refund status and balance are incorrect."
+    ],
+    "warnings": [
+        "Taxpayer's name is not provided, which is a mandatory field.",
+        "Assessment year is marked as \"UNKNOWNAY\", which is incorrect."
+    ],
+    "actions": [
+        "Update taxpayer's name in the `taxpayer` section.",
+        "Update assessment year in the `taxpayer` section with the correct assessment year (AY2024-25).",
+        "Recalculate Taxable Income based on Total Income and Total Deductions.",
+        "Provide breakdown of deductions in the `breakdown` field in the `deductions` section.",
+        "Recalculate final tax based on taxable income.",
+        "Update refund status and balance in the `refund_info` section."
+    ],
+    "summary": "The provided ITR JSON has several errors and inconsistencies. Please update the taxpayer's name, assessment year, Taxable Income, breakdown of deductions, final tax, and refund status and balance to ensure accurate filing."
+}

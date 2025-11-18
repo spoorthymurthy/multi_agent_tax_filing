@@ -1,0 +1,15 @@
+{
+    "document_type": "Tax Document",
+    "person_details": {
+        "name": "MRS KALPANA P",
+        "pan": "AAACH2702H"
+    },
+    "financial_data": {},
+    "deductions": {},
+    "tables": {},
+    "meta": {
+        "file_name": "IT_Certificate_644344844",
+        "processed_on": "20251113_151756",
+        "tds_amount": 0.0
+    }
+}

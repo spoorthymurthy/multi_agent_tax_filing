@@ -1,0 +1,28 @@
+{
+    "insights": [
+        "Taxpayer Information: Name, PAN, and Assessment Year not provided.",
+        "Income Details: Total Income reported as ₹0.0.",
+        "Deductions: Total Deductions reported as ₹0.",
+        "Tax Computed: Final Tax reported as ₹0.0.",
+        "Refund Information: Refund Status reported as 'pending' with Balance ₹0.0.",
+        "Reason for Filing ITR-1: Income may exceed ₹50L.",
+        "Explanation for Selection: Checks performed not comprehensive."
+    ],
+    "warnings": [
+        "Taxpayer Information: Name, PAN, and Assessment Year not provided.",
+        "Income Details: Total Income reported as ₹0.0.",
+        "Deductions: Total Deductions reported as ₹0.",
+        "Tax Computed: Final Tax reported as ₹0.0.",
+        "Refund Information: Refund Status reported as 'pending' with Balance ₹0.0."
+    ],
+    "actions": [
+        "Update Taxpayer Information: Update the taxpayer's name, PAN, and assessment year to ensure accurate filing.",
+        "Verify Income Details: Verify the income details and ensure that all sources of income are reported.",
+        "Verify Deductions: Verify the deductions and ensure that all eligible deductions are claimed.",
+        "Recalculate Tax: Recalculate the tax using the correct tax regime and ensure that the correct tax is reported.",
+        "Verify Refund Information: Verify the refund information and ensure that the correct refund amount is reported.",
+        "Verify Form Selection: Verify that ITR-1 is the correct form and perform all necessary checks to confirm its eligibility.",
+        "Update AI-Generated Flag: Update the AI-generated flag to ensure that the return is accurately generated."
+    ],
+    "summary": "The taxpayer's ITR-1 return has several issues that need to be addressed, including incomplete taxpayer information, inaccurate income and deductions, and potential errors in tax computation and refund information. It is recommended to update the taxpayer information, verify income and deductions, recalculate tax, and verify refund information to ensure accurate filing."
+}

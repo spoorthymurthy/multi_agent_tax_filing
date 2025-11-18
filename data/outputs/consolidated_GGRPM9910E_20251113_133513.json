@@ -1,0 +1,40 @@
+{
+    "consolidated": {
+        "name": "RAVALIPRIYA  KASAVARAPU",
+        "pan": "GGRPM9910E",
+        "assessment_year": "2025-26",
+        "income_components": {
+            "Gross Salary": 15001.0,
+            "Net Salary": 12967.0,
+            "Standard Deduction": 16.0,
+            "Taxable Income": -11.0,
+            "Tax Payable": 0.0,
+            "Total Income": 27968.0
+        },
+        "deductions": {
+            "Total Deductions": 2034.0,
+            "breakdown": 0.0
+        },
+        "tds": 192.0,
+        "sources": [
+            "Unknown",
+            "Unknown",
+            "Other"
+        ]
+    },
+    "capped_deductions": {
+        "Total Deductions": 2034.0,
+        "breakdown": 0.0
+    },
+    "taxable_income": 25934.0,
+    "regimes": {
+        "chosen": {
+            "regime": "new",
+            "final_tax": 0.0
+        }
+    },
+    "refund_info": {
+        "status": "pending",
+        "balance": 0.0
+    }
+}

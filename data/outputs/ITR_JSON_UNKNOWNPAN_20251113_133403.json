@@ -1,0 +1,48 @@
+{
+    "schema_version": "ITR_AY2024_25_v1",
+    "form_name": "ITR-1",
+    "filing_date": "2025-11-13",
+    "taxpayer": {
+        "name": "EarningsD.No.",
+        "pan": "UNKNOWNPAN",
+        "assessment_year": "2025-26"
+    },
+    "income_details": {
+        "Gross Salary": 15000.0,
+        "Net Salary": 13087.0,
+        "Standard Deduction": 0.0,
+        "Taxable Income": 0.0,
+        "Tax Payable": 0.0,
+        "Total Income": 28087.0
+    },
+    "deductions": {
+        "Total Deductions": 1913.0,
+        "breakdown": 0.0
+    },
+    "taxable_income": 26174.0,
+    "tax_computed": {
+        "regime": "new",
+        "final_tax": 0.0
+    },
+    "refund_info": {
+        "status": "pending",
+        "balance": 0.0
+    },
+    "reason_for_itr": "Income predominantly from salary and interest within ₹50L — ITR-1 eligible.",
+    "explanation_for_selection": {
+        "selected_form": "ITR-1",
+        "why_selected": "Income predominantly from salary and interest within ₹50L — ITR-1 eligible.",
+        "checks_performed": {
+            "income_keys": [
+                "Gross Salary",
+                "Net Salary",
+                "Standard Deduction",
+                "Taxable Income",
+                "Tax Payable",
+                "Total Income"
+            ],
+            "total_income": 28087.0
+        }
+    },
+    "ai_generated": true
+}

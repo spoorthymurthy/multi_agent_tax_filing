@@ -1,0 +1,33 @@
+{
+    "document_type": "Payslip",
+    "extracted_fields": {
+        "name": "EarningsD.No.69,KMJ ATELIER,HOSUR MAIN ROAD,RUPENA AGRAHARA,BANGALORE-68",
+        "pan": null,
+        "employer": null,
+        "period": {
+            "from": null,
+            "to": null
+        },
+        "income_components": {
+            "Earningsd.No": 69.0,
+            "Signature": 3131.0,
+            "Cash": 102249436078.0,
+            "This Is Computer Generated Payslip": 0.0
+        },
+        "deductions": {
+            "Basic+Da": 15000.0,
+            "Esi": 113.0,
+            "Net Pay": 13087.0,
+            "Earningsd.No": 69.0,
+            "Signature": 3131.0,
+            "Cash": 102249436078.0,
+            "This Is Computer Generated Payslip": 0.0
+        },
+        "net_salary": 13087.0,
+        "tds_amount": 0.0
+    },
+    "meta": {
+        "file_name": "Spoorthy G R(Intern - 366)",
+        "processed_on": "20251113_144224"
+    }
+}

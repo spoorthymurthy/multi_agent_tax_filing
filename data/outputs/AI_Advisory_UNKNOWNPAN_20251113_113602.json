@@ -1,0 +1,27 @@
+{
+    "insights": [
+        "Taxpayer information is incomplete, including name, PAN, and assessment year.",
+        "Income details are incomplete, only containing a single key-value pair for 'Total Income'.",
+        "Deductions information is incomplete, only containing a single key-value pair for 'Total Deductions'.",
+        "Tax computed information is incomplete, only containing a single key-value pair for 'final_tax'.",
+        "Refund information is incomplete, only containing a single key-value pair for 'balance'.",
+        "Reason for ITR selection is incomplete, and it's not clear if the taxpayer has performed necessary checks.",
+        "AI-generated flag is set to true, but it's not clear if the AI system has been properly trained and validated."
+    ],
+    "warnings": [
+        "Taxpayer information is incomplete, which may lead to rejection of the tax return.",
+        "Incomplete income and deductions information may result in incorrect tax computation.",
+        "Incomplete tax computation information may lead to incorrect tax liability.",
+        "Incomplete refund information may result in delayed or incorrect refund processing.",
+        "Incomplete ITR selection may lead to incorrect tax return filing."
+    ],
+    "actions": [
+        "Update taxpayer information to ensure accuracy.",
+        "Provide detailed income and deductions information.",
+        "Provide detailed tax computation information.",
+        "Provide detailed refund information.",
+        "Verify ITR selection and ensure eligibility for ITR-1.",
+        "Validate AI-generated flag to ensure accuracy."
+    ],
+    "summary": "The tax return is incomplete and requires updates to ensure accuracy and compliance with tax regulations."
+}

@@ -1,0 +1,21 @@
+{
+  "document_type": "Form 16",
+  "extracted_fields": {
+    "name": "of AssesseeMANORANJAN MOHANTA",
+    "pan": "AOCPM9165N",
+    "employer": null,
+    "gross_salary": 0.0,
+    "taxable_income": 0.0,
+    "total_deductions": 0.0,
+    "tds_amount": 1.0,
+    "assessment_year": "2019-20",
+    "period": {
+      "from": null,
+      "to": null
+    }
+  },
+  "meta": {
+    "file_name": "618210801-26AS-SAMPLE",
+    "processed_on": "20251113_165706"
+  }
+}

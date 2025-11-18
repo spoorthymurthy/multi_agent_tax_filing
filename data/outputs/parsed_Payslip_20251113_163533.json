@@ -1,0 +1,49 @@
+{
+  "document_type": "Payslip",
+  "extracted_fields": {
+    "name": null,
+    "pan": null,
+    "employer": "Date Of Birth:22/5/19750808EC0001",
+    "period": {
+      "from": null,
+      "to": null
+    },
+    "income_components": {
+      "HRA": 49100.0
+    },
+    "deductions": {
+      "Sri / Smt : KALPANA P\nGender : Female Date Of Birth:22/5/197": 0.0,
+      "Pay Scale : 79800-211500\nBasic : 98200\nStag. Count : 0 Stag.": 72000.0,
+      "Gross Salary (Excl. Internal 155156\nRec.) :": 87246.0
+    },
+    "gross_salary": 49100.0,
+    "net_salary": 87246.0,
+    "tds_amount": 0.0,
+    "tables": {
+      "earnings": [
+        [
+          "Payment Mode : E-payment Bank A/C Number : 640517616128\nBank name : STATE BANK OF MYSORE Branch name : RAILWY STATION ROAD TIPTUR\nNet Salary Payable : EIGHTY SEVEN THOUSAND TWO HUNDRED AND FORTY SIX ONLY",
+          640517616128.0
+        ]
+      ],
+      "deductions": [
+        [
+          "Sri / Smt : KALPANA P\nGender : Female Date Of Birth:22/5/1975\nDesignation : ASSISTANT PROFESSOR",
+          0.0
+        ],
+        [
+          "Pay Scale : 79800-211500\nBasic : 98200\nStag. Count : 0 Stag.Amt : 0\nPay Fixation Amt :\nInternal Recoveries :\nFA2500 [ 6 / 10 / 10000 ]\nAllowances :\nDA 49100\nHRA 7856",
+          72000.0
+        ],
+        [
+          "Gross Salary (Excl. Internal 155156\nRec.) :",
+          87246.0
+        ]
+      ]
+    }
+  },
+  "meta": {
+    "file_name": "Payslip",
+    "processed_on": "20251113_163533"
+  }
+}

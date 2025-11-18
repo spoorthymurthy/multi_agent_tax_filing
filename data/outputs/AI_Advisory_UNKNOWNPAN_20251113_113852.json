@@ -1,0 +1,29 @@
+{
+    "insights": [
+        "Taxpayer's name, PAN, and assessment year are incomplete.",
+        "Income details are incomplete.",
+        "Deductions section is incomplete.",
+        "Tax computed section is incomplete.",
+        "Refund information is incomplete.",
+        "Reason for filing ITR-1 needs verification.",
+        "AI-generated flag is set to true."
+    ],
+    "warnings": [
+        "Taxpayer's name, PAN, and assessment year are incomplete.",
+        "Income details are incomplete.",
+        "Deductions section is incomplete.",
+        "Tax computed section is incomplete.",
+        "Refund information is incomplete.",
+        "Reason for filing ITR-1 needs verification."
+    ],
+    "actions": [
+        "Update taxpayer's name, PAN, and assessment year.",
+        "Complete income details.",
+        "Complete deductions section.",
+        "Complete tax computed section.",
+        "Complete refund information.",
+        "Verify reason for filing ITR-1.",
+        "Set AI-generated flag to false for manual review and verification."
+    ],
+    "summary": "The provided ITR JSON is incomplete and requires updates to ensure accurate and complete information. The taxpayer's name, PAN, and assessment year are incomplete, and the income details, deductions section, tax computed section, and refund information are also incomplete. The reason for filing ITR-1 needs verification, and the AI-generated flag is set to true. Please update the ITR JSON with complete and accurate information and set the AI-generated flag to false for manual review and verification."
+}

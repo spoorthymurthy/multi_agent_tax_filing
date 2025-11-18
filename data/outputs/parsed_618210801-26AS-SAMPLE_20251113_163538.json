@@ -1,0 +1,515 @@
+{
+  "document_type": "Form 16",
+  "extracted_fields": {
+    "name": null,
+    "pan": "AOCPM9165N",
+    "employer_or_bank": null,
+    "employer_tan": "MUMT06732F",
+    "employer_pan": null,
+    "income_components": {},
+    "deductions": {
+      "Total Deductions": 0.0
+    },
+    "tds_amount": 1.0,
+    "period": {
+      "from": null,
+      "to": null
+    },
+    "tables": {
+      "partb_lines": [
+        {
+          "line": "Permanent Account Number (PAN) | AOCPM9165N | Current Status of PAN | Active | Financial Year | 2018-19 | Assessment Year | 2019-20",
+          "amount": 9165.0
+        },
+        {
+          "line": "Name of Assessee | MANORANJAN MOHANTA |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Address of Assessee | AT SANKHAPATA W NO-8, PO BARIPADA,\nMAYURBHANJ, ODISHA, 757001 |  |  |  |  |  | ",
+          "amount": -8.0
+        },
+        {
+          "line": "Sr. No. | Name of Deductor |  |  |  | TAN of Deductor | Total Amount Paid/\nCredited | Total Tax Deducted# | Total TDS\nDeposited",
+          "amount": null
+        },
+        {
+          "line": "1 | TATA CONSULTING ENGINEERS LIMITED |  |  |  | MUMT06732F | 829169.24 | 54174.00 | 54174.00",
+          "amount": 1.0
+        },
+        {
+          "line": "Sr. No. | Section1 | Transaction Date | Status of Booking* | Date of Booking | Remarks** | Amount Paid /\nCredited | Tax Deducted## | TDS Deposited",
+          "amount": 1.0
+        },
+        {
+          "line": "1 | 192 | 29-Mar-2019 | F | 02-Jun-2019 | - | 66684.00 | 6949.00 | 6949.00",
+          "amount": 1.0
+        },
+        {
+          "line": "2 | 192 | 28-Feb-2019 | F | 02-Jun-2019 | - | 66684.00 | 6965.00 | 6965.00",
+          "amount": 2.0
+        },
+        {
+          "line": "3 | 192 | 29-Jan-2019 | F | 02-Jun-2019 | - | 66684.00 | 11017.00 | 11017.00",
+          "amount": 3.0
+        },
+        {
+          "line": "4 | 192 | 31-Dec-2018 | F | 30-Jan-2019 | - | 66683.32 | 2790.00 | 2790.00",
+          "amount": 4.0
+        },
+        {
+          "line": "5 | 192 | 30-Nov-2018 | F | 30-Jan-2019 | - | 66683.32 | 2790.00 | 2790.00",
+          "amount": 5.0
+        },
+        {
+          "line": "6 | 192 | 31-Oct-2018 | F | 30-Jan-2019 | - | 66683.00 | 2790.00 | 2790.00",
+          "amount": 6.0
+        },
+        {
+          "line": "7 | 192 | 30-Sep-2018 | F | 01-Nov-2018 | - | 66683.32 | 2787.00 | 2787.00",
+          "amount": 7.0
+        },
+        {
+          "line": "8 | 192 | 31-Aug-2018 | F | 01-Nov-2018 | - | 66683.32 | 2787.00 | 2787.00",
+          "amount": 8.0
+        },
+        {
+          "line": "9 | 192 | 31-Jul-2018 | F | 01-Nov-2018 | - | 95651.00 | 8779.00 | 8779.00",
+          "amount": 9.0
+        },
+        {
+          "line": "10 | 192 | 30-Jun-2018 | F | 28-Jul-2018 | - | 70553.32 | 2752.00 | 2752.00",
+          "amount": 10.0
+        },
+        {
+          "line": "11 | 192 | 31-May-2018 | F | 28-Jul-2018 | - | 64748.32 | 2282.00 | 2282.00",
+          "amount": 11.0
+        },
+        {
+          "line": "12 | 192 | 30-Apr-2018 | F | 28-Jul-2018 | - | 64748.32 | 1486.00 | 1486.00",
+          "amount": 12.0
+        },
+        {
+          "line": "Sr. No. | Name of Deductor |  |  | TAN of Deductor | Total Amount Paid /\nCredited | Total Tax Deducted# | Total TDS\nDeposited",
+          "amount": null
+        },
+        {
+          "line": " |  |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr. No. | Section1 | Transaction Date | Date of Booking | Remarks** | Amount Paid/Credited | Tax Deducted## | TDS Deposited",
+          "amount": 1.0
+        },
+        {
+          "line": "Sr. No. | Acknowledgement\nNumber | Name of Deductor | PAN of Deductor | Transaction Date | Total Transaction\nAmount | Total TDS\nDeposited***",
+          "amount": null
+        },
+        {
+          "line": " |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr. No. | TDS Certificate\nNumber | Date of Deposit | Status of Booking* | Date of Booking | Demand Payment | TDS Deposited***",
+          "amount": null
+        },
+        {
+          "line": "Gross Total Across Deductor(s) |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr. No. | Name of Collector |  |  |  | TAN of Collector | Total Amount Paid/\nDebited | Total Tax Collected+ | Total TCS\nDeposited",
+          "amount": null
+        },
+        {
+          "line": " |  |  |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr. No. | Section1 | Transaction Date | Status of Booking* | Date of Booking | Remarks** | Amount Paid/\nDebited | Tax Collected++ | TCS Deposited",
+          "amount": 1.0
+        },
+        {
+          "line": "Sr.\nNo. | Major 3\nHead | Minor 2\nHead | Tax | Surcharge | Education\nCess | Others | Total Tax | BSR Code | Date of\nDeposit | Challan Serial\nNumber | Remarks**",
+          "amount": 3.0
+        },
+        {
+          "line": "Sr.\nNo. | Assessment Year | Mode | Refund Issued | Nature of Refund | Amount of Refund | Interest | Date of Payment | Remarks",
+          "amount": null
+        },
+        {
+          "line": "Sr.\nNo. | Type Of 4\nTransaction | Name of AIR Filer | Transaction\nDate | Single/Joint\nParty Transaction | Number of\nParties | Amount | Mode | Remarks**",
+          "amount": 4.0
+        },
+        {
+          "line": "Sr.\nNo. | Acknowledgement\nNumber | Name Of Deductee | PAN of\nDeductee | Transaction\nDate | Total Transaction\nAmount | Total TDS\nDeposited*** | Total Amount ###\nDeposited other\nthan TDS",
+          "amount": null
+        },
+        {
+          "line": " |  |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr.\nNo. | TDS Certificate\nNumber | Date of Deposit | Status of\nBooking* | Date of Booking | Demand Payment | TDS Deposited*** | Total Amount ###\nDeposited other\nthan TDS",
+          "amount": null
+        },
+        {
+          "line": "Gross Total Across Deductor(s) |  |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr. No. | Financial Year | Short Payment | Short Deduction | Interest on TDS\nPayments Default | Interest on TDS\nDeduction Default | Late Filing Fee u/s\n234E | Interest u/s 220(2) | Total Default",
+          "amount": 234.0
+        },
+        {
+          "line": " |  |  |  |  |  |  |  | ",
+          "amount": null
+        },
+        {
+          "line": "Sr. No. | TANs | Short Payment | Short Deduction | Interest on TDS\nPayments Default | Interest on TDS\nDeduction Default | Late Filing Fee u/s\n234E | Interest u/s 220(2) | Total Default",
+          "amount": 234.0
+        },
+        {
+          "line": "Part of Form 26AS | Contact in case of any clarification",
+          "amount": 26.0
+        },
+        {
+          "line": "A | Deductor",
+          "amount": null
+        },
+        {
+          "line": "A1 | Deductor",
+          "amount": 1.0
+        },
+        {
+          "line": "A2 | Deductor",
+          "amount": 2.0
+        },
+        {
+          "line": "B | Collector",
+          "amount": null
+        },
+        {
+          "line": "C | Assessing Officer / Bank",
+          "amount": null
+        },
+        {
+          "line": "D | Assessing Officer / ITR-CPC",
+          "amount": null
+        },
+        {
+          "line": "E | Concerned AIR Filer",
+          "amount": null
+        },
+        {
+          "line": "F | NSDL / Concerned Bank Branch",
+          "amount": null
+        },
+        {
+          "line": "G | Deductor",
+          "amount": null
+        },
+        {
+          "line": "Legend | Description | Definition",
+          "amount": null
+        },
+        {
+          "line": "U | Unmatched | Deductors have not deposited taxes or have furnished incorrect particulars of tax payment. Final credit will be reflected only\nwhen payment details in bank match with details of deposit in TDS / TCS statement",
+          "amount": null
+        },
+        {
+          "line": "P | Provisional | Provisional tax credit is effected only for TDS / TCS Statements filed by Government deductors.\"P\" status will be changed to\nFinal (F) on verification of payment details submitted by Pay and Accounts Officer (PAO)",
+          "amount": null
+        },
+        {
+          "line": "F | Final | In case of non-government deductors, payment details of TDS / TCS deposited in bank by deductors have matched with the\npayment details mentioned in the TDS / TCS statement filed by the deductors. In case of government deductors, details of\nTDS / TCS booked in Government account have been verified with payment details submitted by Pay and Accounts Officer\n(PAO)",
+          "amount": 0.0
+        },
+        {
+          "line": "O | Overbooked | Payment details of TDS / TCS deposited in bank by deductor have matched with details mentioned in the TDS / TCS\nstatement but the amount is over claimed in the statement. Final (F) credit will be reflected only when deductor reduces\nclaimed amount in the statement or makes additional payment for excess amount claimed in the statement",
+          "amount": null
+        },
+        {
+          "line": "Legend | Description",
+          "amount": null
+        },
+        {
+          "line": "'A' | Rectification of error in challan uploaded by bank",
+          "amount": null
+        },
+        {
+          "line": "'B' | Rectification of error in statement uploaded by deductor",
+          "amount": null
+        },
+        {
+          "line": "'C' | Rectification of error in AIR filed by filer",
+          "amount": null
+        },
+        {
+          "line": "'D' | Rectification of error in Form 24G filed by Accounts Officer",
+          "amount": 24.0
+        },
+        {
+          "line": "'E' | Rectification of error in Challan by Assessing Officer",
+          "amount": null
+        },
+        {
+          "line": "'F' | Lower/ No deduction certificate u/s 197",
+          "amount": 197.0
+        },
+        {
+          "line": "'T' | Transporter",
+          "amount": null
+        },
+        {
+          "line": "'G' | Reprocessing of Statement",
+          "amount": null
+        },
+        {
+          "line": "Section | Description | Section | Description",
+          "amount": null
+        },
+        {
+          "line": "192 | Salary | 194LD | TDS on interest on bonds / government securities",
+          "amount": 192.0
+        },
+        {
+          "line": "192A | TDS on PF withdrawal | 195 | Other sums payable to a non-resident",
+          "amount": 192.0
+        },
+        {
+          "line": "193 | Interest on Securities | 196A | Income in respect of units of non-residents",
+          "amount": 193.0
+        },
+        {
+          "line": "194 | Dividends | 196B | Payments in respect of units to an offshore fund",
+          "amount": 194.0
+        },
+        {
+          "line": "194A | Interest other than 'Interest on securities' | 196C | Income from foreign currency bonds or shares of Indian",
+          "amount": 194.0
+        },
+        {
+          "line": "194B | Winning from lottery or crossword puzzle | 196D | Income of foreign institutional investors from securities",
+          "amount": 194.0
+        },
+        {
+          "line": "194BB | Winning from horse race | 206CA | Collection at source from alcoholic liquor for human",
+          "amount": 194.0
+        },
+        {
+          "line": "194C | Payments to contractors and sub-contractors | 206CB | Collection at source from timber obtained under forest lease",
+          "amount": 194.0
+        },
+        {
+          "line": "194D | Insurance commission | 206CC | Collection at source from timber obtained by any mode other than a forest\nlease",
+          "amount": 194.0
+        },
+        {
+          "line": "194DA | Payment in respect of life insurance policy |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CD | Collection at source from any other forest produce (not being tendu leaves)",
+          "amount": 206.0
+        },
+        {
+          "line": "194E | Payments to non-resident sportsmen or sports associations |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CE | Collection at source from any scrap",
+          "amount": 206.0
+        },
+        {
+          "line": "194EE | Payments in respect of deposits under National Savings Scheme |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CF | Collection at source from contractors or licensee or lease relating to parking\nlots",
+          "amount": 206.0
+        },
+        {
+          "line": "194F | Payments on account of repurchase of units by Mutual Fund or Unit Trust of\nIndia |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CG | Collection at source from contractors or licensee or lease relating to toll plaza",
+          "amount": 206.0
+        },
+        {
+          "line": "194G | Commission, price, etc. on sale of lottery tickets |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CH | Collection at source from contractors or licensee or lease relating to mine or\nquarry",
+          "amount": 206.0
+        },
+        {
+          "line": "194H | Commission or brokerage |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": "194I | Rent |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CI | Collection at source from tendu Leaves",
+          "amount": 206.0
+        },
+        {
+          "line": "194IA | TDS on Sale of immovable property |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CJ | Collection at source from on sale of certain Minerals",
+          "amount": 206.0
+        },
+        {
+          "line": "194J | Fees for professional or technical services |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CK | Collection at source on cash case of Bullion and Jewellery",
+          "amount": 206.0
+        },
+        {
+          "line": "194K | Income payable to a resident assessee in respect of units of a specified mutual\nfund or of the units of the Unit Trust of India |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CL | Collection at source on sale of Motor vehicle",
+          "amount": 206.0
+        },
+        {
+          "line": " |  | 206CM | Collection at source on sale in cash of any goods(other than bullion/jewelry)",
+          "amount": 206.0
+        },
+        {
+          "line": "194LA | Payment of compensation on acquisition of certain immovable |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": " |  | 206CN | Collection at source on providing of any services(other than Ch",
+          "amount": 206.0
+        },
+        {
+          "line": "194LB | Income by way of Interest from Infrastructure Debt fund |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": "194LC | Income by way of interest from specified company payable to a non-resident |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": "194LBA | Certain income from units of a business trust |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": "194LBB | Income in respect of units of investment fund |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": "194LBC | Income in respect of investment in securitization trust |  | ",
+          "amount": 194.0
+        },
+        {
+          "line": "Code | Description | Code | Description",
+          "amount": null
+        },
+        {
+          "line": "100 | Advance tax | 0020 | Corporation Tax",
+          "amount": 100.0
+        },
+        {
+          "line": "102 | Surtax | 0021 | Income Tax (other than companies)",
+          "amount": 102.0
+        },
+        {
+          "line": "106 | Tax on distributed profit of domestic companies | 0023 | Hotel Receipt Tax",
+          "amount": 106.0
+        },
+        {
+          "line": "107 | Tax on distributed income to unit holder | 0024 | Interest Tax",
+          "amount": 107.0
+        },
+        {
+          "line": "300 | Self Assessment Tax | 0026 | Fringe Benefit Tax",
+          "amount": 300.0
+        },
+        {
+          "line": "400 | Tax on regular assessment | 0028 | Expenditure Tax / Other Taxes",
+          "amount": 400.0
+        },
+        {
+          "line": "800 | TDS on sale of immovable property | 0031 | Estate Duty",
+          "amount": 800.0
+        },
+        {
+          "line": " |  | 0032 | Wealth Tax",
+          "amount": 32.0
+        },
+        {
+          "line": " |  | 0033 | Gift Tax",
+          "amount": 33.0
+        },
+        {
+          "line": "Code | Description",
+          "amount": null
+        },
+        {
+          "line": "001* | Cash deposits aggregating to ten lakh rupees or more in a year in any savings account of a person maintained in a banking company to which the Banking",
+          "amount": 1.0
+        },
+        {
+          "line": "002* | Payment made by any person against bills raised in respect of a credit card aggregating to two lakh rupees or more in a year.",
+          "amount": 2.0
+        },
+        {
+          "line": "003 | Receipt from any person of an amount of two lakh rupees or more for purchase of units of a Mutual Fund.",
+          "amount": 3.0
+        },
+        {
+          "line": "004 | Receipt from any person of an amount of five lakh rupees or more for acquiring bonds or debentures issued by a company or institution.",
+          "amount": 4.0
+        },
+        {
+          "line": "005 | Receipt from any person of an amount of one lakh rupees or more for acquiring shares issued by a company.",
+          "amount": 5.0
+        },
+        {
+          "line": "006* | Purchase by any person of immovable property valued at thirty lakh rupees or more",
+          "amount": 6.0
+        },
+        {
+          "line": "007* | Sale by any person of immovable property valued at thirty lakh rupees or more.",
+          "amount": 7.0
+        },
+        {
+          "line": "008 | Receipt from any person of an amount of five lakh rupees or more in a year for investment in bonds issued by Reserve Bank of India.",
+          "amount": 8.0
+        },
+        {
+          "line": "Abbreviation | Description | Abbreviation | Description",
+          "amount": null
+        },
+        {
+          "line": "AIR | Annual Information Return | TDS | Tax Deducted at Source",
+          "amount": null
+        },
+        {
+          "line": "AY | Assessment Year | TCS | Tax Collected at Source",
+          "amount": null
+        },
+        {
+          "line": "EC | Education Cess |  | ",
+          "amount": null
+        }
+      ]
+    }
+  },
+  "meta": {
+    "file_name": "618210801-26AS-SAMPLE",
+    "processed_on": "20251113_163538"
+  }
+}

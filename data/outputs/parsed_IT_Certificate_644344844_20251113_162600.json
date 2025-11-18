@@ -1,0 +1,23 @@
+{
+  "document_type": "Tax Document",
+  "extracted_fields": {
+    "name": "MRS KALPANA P",
+    "pan": null,
+    "employer": null,
+    "assessment_year": null,
+    "period": {
+      "from": "01/04/2023",
+      "to": "31/03/2024"
+    },
+    "gross_salary": 0.0,
+    "total_deductions": 0.0,
+    "net_salary": 0.0,
+    "tds_amount": 0.0,
+    "interest_paid": 307998.0,
+    "rent_paid": 0.0
+  },
+  "meta": {
+    "file_name": "IT_Certificate_644344844",
+    "processed_on": "20251113_162600"
+  }
+}

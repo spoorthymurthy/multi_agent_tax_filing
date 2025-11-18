@@ -1,0 +1,23 @@
+{
+    "document_type": "Form 16",
+    "extracted_fields": {
+        "name": null,
+        "pan": "AOCPM9165N",
+        "assessment_year": "2019-20",
+        "gross_salary": 829169.24,
+        "total_deductions": 4174.0,
+        "taxable_income": 0.0,
+        "tds_amount": 4174.0,
+        "net_salary": 824995.24,
+        "interest_paid": 0.0,
+        "rent_paid": 0.0,
+        "period": {
+            "from": null,
+            "to": null
+        }
+    },
+    "meta": {
+        "file_name": "618210801-26AS-SAMPLE",
+        "processed_on": "20251113_180617"
+    }
+}

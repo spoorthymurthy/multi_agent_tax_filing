@@ -1,0 +1,15 @@
+{
+  "document_type": "Loan Certificate",
+  "extracted_fields": {
+    "name": null,
+    "pan": null,
+    "gross_salary": 0.0,
+    "total_deductions": 0.0,
+    "taxable_income": 0.0,
+    "tds_amount": 0.0
+  },
+  "meta": {
+    "file_name": "IT_Certificate_644344844",
+    "processed_on": "20251113_160043"
+  }
+}

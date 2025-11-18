@@ -1,0 +1,46 @@
+{
+    "document_type": "Form 16",
+    "person_details": {
+        "name": "'F'Lower/ No deduction certificate u/s 197Assessee PAN:",
+        "pan": "AOCPM9165N"
+    },
+    "financial_data": {
+        "Standard Deduction": 0.0,
+        "Gross Salary": 829169.24,
+        "Taxable Income": 829169.24,
+        "Tax Payable": 0.0
+    },
+    "deductions": {
+        "Total Deductions": 0.0
+    },
+    "tables": {
+        "partb_lines": [
+            {
+                "line": "Sr. No.Section1Transaction DateStatus of Booking*Date of BookingRemarks**Amount Paid/DebitedTax Collected++TCS Deposited",
+                "amount": 1.0
+            },
+            {
+                "line": "Sr. No.Major Head3Minor Head2TaxSurchargeEducation CessOthersTotal TaxBSR CodeDate of DepositChallan Serial  NumberRemarks**",
+                "amount": 3.0
+            },
+            {
+                "line": "Sr. No.Type Of Transaction4Name of AIR FilerTransaction DateSingle/JointParty TransactionNumber of PartiesAmountModeRemarks**",
+                "amount": 4.0
+            },
+            {
+                "line": "1.Due date for filing Annual Information return by specified entities (Filers) is 31st August, immediately following the FY in which transaction is registered / recorded. This section will be updated after filing AIR.2. Transaction amount is total amount reported by AIR filer. It does not reflect respective share of each individual",
+                "amount": 1.0
+            }
+        ]
+    },
+    "meta": {
+        "file_name": "618210801-26AS-SAMPLE",
+        "processed_on": "20251113_151757",
+        "tds_amount": 4174.0,
+        "employer_or_bank": null,
+        "period": {
+            "from": null,
+            "to": null
+        }
+    }
+}

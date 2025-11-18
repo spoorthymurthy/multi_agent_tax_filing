@@ -1,0 +1,23 @@
+{
+  "document_type": "Form 16",
+  "extracted_fields": {
+    "name": "'F'Lower/ No deduction certificate u/s 197Assessee PAN:",
+    "pan": "AOCPM9165N",
+    "employer": null,
+    "assessment_year": "2019-20",
+    "period": {
+      "from": null,
+      "to": null
+    },
+    "gross_salary": 0.0,
+    "total_deductions": 0.0,
+    "net_salary": 0.0,
+    "tds_amount": 1.0,
+    "interest_paid": 0.0,
+    "rent_paid": 0.0
+  },
+  "meta": {
+    "file_name": "618210801-26AS-SAMPLE",
+    "processed_on": "20251113_162358"
+  }
+}

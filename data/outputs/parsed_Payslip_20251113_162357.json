@@ -1,0 +1,23 @@
+{
+  "document_type": "Payslip",
+  "extracted_fields": {
+    "name": "STATE BANK OF MYSORE Branch name",
+    "pan": null,
+    "employer": "No/Name",
+    "assessment_year": null,
+    "period": {
+      "from": null,
+      "to": null
+    },
+    "gross_salary": 155156.0,
+    "total_deductions": 200.0,
+    "net_salary": 154956.0,
+    "tds_amount": 0.0,
+    "interest_paid": 0.0,
+    "rent_paid": 0.0
+  },
+  "meta": {
+    "file_name": "Payslip",
+    "processed_on": "20251113_162357"
+  }
+}

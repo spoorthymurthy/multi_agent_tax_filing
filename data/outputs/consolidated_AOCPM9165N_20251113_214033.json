@@ -1,0 +1,57 @@
+{
+    "consolidated": {
+        "name": "'F'Lower/ No deduction certificate u/s 197Assessee PAN:",
+        "pan": "AOCPM9165N",
+        "assessment_year": "201920",
+        "income_components": {
+            "interest": 307998.0,
+            "Gross Salary": 15017.0,
+            "Net Salary": 13087.0,
+            "Standard Deduction": 0.0,
+            "Taxable Income": 9.0,
+            "Tax Payable": 0.0,
+            "Total Income": 28104.0
+        },
+        "deductions": {
+            "Total Deductions": 309913.0,
+            "section_24b": 307998.0,
+            "breakdown": 0.0,
+            "Section 80C": 0.0,
+            "Section 80D": 0.0,
+            "Section 80CCD": 1.0
+        },
+        "tds": 8353.0,
+        "sources": [
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown"
+        ]
+    },
+    "capped_deductions": {
+        "Total Deductions": 309913.0,
+        "section_24b": 307998.0,
+        "breakdown": 0.0,
+        "Section 80C": 0.0,
+        "Section 80D": 0.0,
+        "Section 80CCD": 1.0
+    },
+    "taxable_income": 0,
+    "regimes": {
+        "chosen": {
+            "regime": "new",
+            "final_tax": 0.0
+        }
+    },
+    "refund_info": {
+        "status": "pending",
+        "balance": 0.0
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "document_type": "Form 16",
+    "extracted_fields": {
+        "name": "'F'Lower/ No deduction certificate u/s 197Assessee PAN:",
+        "pan": "AOCPM9165N",
+        "employer_or_bank": "Data updated till 10-Jul-2019",
+        "employer_tan": "MUMT06732F",
+        "employer_pan": null,
+        "income_components": {
+            "Gross Salary": 829169.24,
+            "Standard Deduction": 0.0,
+            "Taxable Income": 0.0
+        },
+        "deductions": {
+            "Total Deductions": 0.0
+        },
+        "tds_amount": 4174.0,
+        "period": {
+            "from": null,
+            "to": null
+        }
+    },
+    "meta": {
+        "file_name": "618210801-26AS-SAMPLE",
+        "processed_on": "20251113_151608"
+    }
+}

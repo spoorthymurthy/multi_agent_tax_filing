@@ -1,0 +1,212 @@
+{
+    "document_type": "Payslip",
+    "person_details": {
+        "name": null,
+        "pan": null
+    },
+    "financial_data": {
+        "Note: This is an electronically generated report, hence does": 0.0,
+        "Pay Slip For The Month Of November": 2024.0,
+        "Establishment No/Name: 2 / Est": 2.0,
+        "KGID No/Metal No: 2234339 GPF / PRAN Number: 110091723930 AG": 2234339.0,
+        "Head Of Account : 2202-03-103-2-": 2202.0,
+        "HRA": 49100.0,
+        "7856IT": 7856.0,
+        "EGIS": 30000.0,
+        "": 480.0,
+        "KGID 8000 [ 31 / 40 / 72000 ]": 8000.0,
+        "Rec.) :155156Sum of Deductions &": 155156.0,
+        "Recoveries:65410 ": 65410.0,
+        "Gross": 87246.0,
+        "Net Salary Payable: 87246 1/24/25, 3:02 PM Viewpayslip": 87246.0,
+        "https://hrmsess.karnataka.gov.in/home/viewpayslip 1/": 1.0,
+        "Standard Deduction": 0.0
+    },
+    "deductions": {
+        "FA2500 [ 6 / 10 / 10000 ]": 2500.0,
+        "Payment Mode : E-payment Bank A/C Number :": 640517616128.0,
+        "Note: This is an electronically generated report, hence does": 0.0,
+        "Pay Slip For The Month Of November": 2024.0,
+        "Establishment No/Name: 2 / Est": 2.0,
+        "PF": 2234339.0,
+        "Head Of Account : 2202-03-103-2-": 2202.0,
+        "HRA": 49100.0,
+        "7856IT": 7856.0,
+        "EGIS": 30000.0,
+        "": 480.0,
+        "KGID 8000 [ 31 / 40 / 72000 ]": 8000.0,
+        "Rec.) :155156Sum of Deductions &": 155156.0,
+        "Recoveries:65410 ": 65410.0,
+        "Net Salary : 87246 Total Local Recoveries : 200 ": 87246.0,
+        "Net Salary Payable: 87246 1/24/25, 3:02 PM Viewpayslip": 87246.0,
+        "https://hrmsess.karnataka.gov.in/home/viewpayslip 1/": 1.0
+    },
+    "tables": {
+        "earnings": [
+            [
+                "Note: This is an electronically generated report, hence does",
+                0.0
+            ],
+            [
+                "Pay Slip For The Month Of November",
+                2024.0
+            ],
+            [
+                "Establishment No/Name: 2 / Est",
+                2.0
+            ],
+            [
+                "KGID No/Metal No: 2234339 GPF / PRAN Number: 110091723930 AG",
+                2234339.0
+            ],
+            [
+                "Head Of Account : 2202-03-103-2-",
+                2202.0
+            ],
+            [
+                "HRA",
+                49100.0
+            ],
+            [
+                "7856IT",
+                7856.0
+            ],
+            [
+                "EGIS",
+                30000.0
+            ],
+            [
+                "",
+                14730.0
+            ],
+            [
+                "",
+                12000.0
+            ],
+            [
+                "",
+                200.0
+            ],
+            [
+                "",
+                480.0
+            ],
+            [
+                "KGID 8000 [ 31 / 40 / 72000 ]",
+                8000.0
+            ],
+            [
+                "Rec.) :155156Sum of Deductions &",
+                155156.0
+            ],
+            [
+                "Recoveries:65410 ",
+                65410.0
+            ],
+            [
+                "Net Salary : 87246 Total Local Recoveries : 200 ",
+                87246.0
+            ],
+            [
+                "Net Salary Payable: 87246 1/24/25, 3:02 PM Viewpayslip",
+                87246.0
+            ],
+            [
+                "https://hrmsess.karnataka.gov.in/home/viewpayslip 1/",
+                1.0
+            ]
+        ],
+        "deductions": [
+            [
+                "FA2500 [ 6 / 10 / 10000 ]",
+                2500.0
+            ],
+            [
+                "Payment Mode : E-payment Bank A/C Number :",
+                640517616128.0
+            ],
+            [
+                "Note: This is an electronically generated report, hence does",
+                0.0
+            ],
+            [
+                "Pay Slip For The Month Of November",
+                2024.0
+            ],
+            [
+                "Establishment No/Name: 2 / Est",
+                2.0
+            ],
+            [
+                "KGID No/Metal No: 2234339 GPF / PRAN Number: 110091723930 AG",
+                2234339.0
+            ],
+            [
+                "Head Of Account : 2202-03-103-2-",
+                2202.0
+            ],
+            [
+                "HRA",
+                49100.0
+            ],
+            [
+                "7856IT",
+                7856.0
+            ],
+            [
+                "EGIS",
+                30000.0
+            ],
+            [
+                "",
+                14730.0
+            ],
+            [
+                "",
+                12000.0
+            ],
+            [
+                "",
+                200.0
+            ],
+            [
+                "",
+                480.0
+            ],
+            [
+                "KGID 8000 [ 31 / 40 / 72000 ]",
+                8000.0
+            ],
+            [
+                "Rec.) :155156Sum of Deductions &",
+                155156.0
+            ],
+            [
+                "Recoveries:65410 ",
+                65410.0
+            ],
+            [
+                "Net Salary : 87246 Total Local Recoveries : 200 ",
+                87246.0
+            ],
+            [
+                "Net Salary Payable: 87246 1/24/25, 3:02 PM Viewpayslip",
+                87246.0
+            ],
+            [
+                "https://hrmsess.karnataka.gov.in/home/viewpayslip 1/",
+                1.0
+            ]
+        ]
+    },
+    "meta": {
+        "file_name": "Payslip",
+        "processed_on": "20251113_151756",
+        "tds_amount": 0.0,
+        "net_salary": 87246.0,
+        "period": {
+            "from": null,
+            "to": null
+        }
+    }
+}

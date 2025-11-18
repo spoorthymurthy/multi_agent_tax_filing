@@ -1,0 +1,22 @@
+{
+    "document_type": "Payslip",
+    "extracted_fields": {
+        "name": "EarningsD.No.",
+        "pan": null,
+        "employer": null,
+        "period": {
+            "from": null,
+            "to": null
+        },
+        "income_components": {},
+        "deductions": {
+            "Net Pay 13,087.00Intern": 366.0
+        },
+        "net_salary": 13087.0,
+        "tds_amount": 0.0
+    },
+    "meta": {
+        "file_name": "Spoorthy G R(Intern - 366)",
+        "processed_on": "20251113_135108"
+    }
+}
