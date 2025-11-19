@@ -1,0 +1,25 @@
+{
+  "taxpayer": {
+    "name": "UNKNOWN",
+    "pan": "UNKNOWN",
+    "assessment_year": "",
+    "profile": {}
+  },
+  "income": {
+    "gross_total_income": 2032474.0,
+    "taxable_income": 1982474.0
+  },
+  "tax": {
+    "tax_old": 423531.89,
+    "tax_new": 306531.89,
+    "chosen_regime": "new",
+    "final_tax": 306531.89,
+    "tds": 290000.0,
+    "tax_due": 16531.89,
+    "refund": 0.0
+  },
+  "metadata": {
+    "generated_on": "2025-11-18 18:11:46",
+    "source": "AI-Multi-Agent-FilingAgent"
+  }
+}

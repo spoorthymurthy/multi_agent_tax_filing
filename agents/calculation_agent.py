@@ -1,440 +1,525 @@
 # agents/calculation_agent.py
-"""CalculationAgent: Performs CA-style tax computation (Old vs New regimes)"""
-from __future__ import annotations
-
+"""Tax calculation agent for Indian Income Tax (AY 2025-26) - Old vs New Regime"""
 import os
 import json
 from datetime import datetime
-from typing import Any, Dict
+from typing import Optional, Dict, Any, List
+from dotenv import load_dotenv
 
-OUTPUT_DIR = "data/outputs"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+try:
+    from groq import Groq
+    _HAS_GROQ = True
+except Exception:
+    Groq = None
+    _HAS_GROQ = False
 
-
-def _remove_zero_values(obj, keep_keys=None):
-    """Recursively remove zero values, empty dicts, and None values from nested structures.
-    keep_keys: list of keys to always keep even if zero (e.g., ['refund', 'tax_due'])
-    """
-    if keep_keys is None:
-        keep_keys = ['refund', 'tax_due', 'schema_version', 'pan', 'name', 'assessment_year', 'generated_on', 'output_path']
-    
-    if isinstance(obj, dict):
-        result = {}
-        for k, v in obj.items():
-            # Always keep structural/important keys
-            if k in keep_keys:
-                result[k] = v
-                continue
-            
-            cleaned = _remove_zero_values(v, keep_keys)
-            # Skip if value is 0, None, empty dict/list, or empty string
-            if cleaned is None or cleaned == 0 or cleaned == 0.0 or cleaned == "":
-                continue
-            if isinstance(cleaned, (dict, list)) and len(cleaned) == 0:
-                continue
-            result[k] = cleaned
-        return result
-    elif isinstance(obj, list):
-        result = []
-        for item in obj:
-            cleaned = _remove_zero_values(item, keep_keys)
-            if cleaned is not None and cleaned != 0 and cleaned != 0.0 and cleaned != "":
-                if not (isinstance(cleaned, (dict, list)) and len(cleaned) == 0):
-                    result.append(cleaned)
-        return result
-    else:
-        return obj
+load_dotenv()
 
 
-def _to_number(x: Any, default: float = 0.0) -> float:
+def _fmt_inr(x: float) -> str:
+    """Format number as Indian-rupee style: ₹1,23,456"""
     try:
-        if x is None:
-            return float(default)
-        if isinstance(x, (int, float)):
-            return float(x)
-        s = str(x)
-        s = s.replace("(", "-").replace(")", "")
-        s = s.replace("₹", "").replace("Rs", "").replace(",", "").strip()
-        if s == "":
-            return float(default)
-        return float(s)
+        return f"₹{float(x):,.2f}"
     except Exception:
-        return float(default)
+        return f"₹{x}"
 
 
-def compute_hra_exemption(basic: float, hra_received: float, rent_paid: float, is_metro: bool = False) -> float:
-    """HRA exemption = min(actual HRA, rent_paid - 10% basic, 50%/40% basic)"""
-    if basic <= 0 or hra_received <= 0:
-        return 0.0
-    return round(min(hra_received, max(0.0, rent_paid - 0.10 * basic), (0.5 if is_metro else 0.4) * basic), 2)
-
-
-def compute_lta_exemption(lta_received: float, actual_lta_claimed: float) -> float:
-    """LTA exemption = min(lta_received, actual_lta_claimed)"""
-    if lta_received <= 0:
-        return 0.0
-    return round(min(lta_received, actual_lta_claimed or lta_received), 2)
-
-
-def compute_children_education_exemption(amount: float) -> float:
-    """Children education exemption capped at ₹1,200 per child per year"""
-    return round(min(amount, 1200.0), 2) if amount > 0 else 0.0
-
-
-def compute_tax_old_regime(ti: float) -> tuple[float, float, float]:
-    """Compute tax under old regime (AY 2024-25). Returns: (tax_before_cess, cess_4pct, total_tax)"""
-    ti = max(0.0, float(ti))
-    tax_before_cess = 0.0
-    
-    # Old regime slabs (AY 2024-25)
-    if ti <= 250000:
-        tax_before_cess = 0.0
-    elif ti <= 500000:
-        tax_before_cess = (ti - 250000) * 0.05
-    elif ti <= 1000000:
-        tax_before_cess = 12500 + (ti - 500000) * 0.20
-    else:
-        tax_before_cess = 12500 + 100000 + (ti - 1000000) * 0.30
-
-    tax_before_cess = round(tax_before_cess, 2)
-    cess_4pct = round(tax_before_cess * 0.04, 2)
-    total_tax = round(tax_before_cess + cess_4pct, 2)
-    
-    return (tax_before_cess, cess_4pct, total_tax)
-
-
-def compute_tax_new_regime(ti: float) -> tuple[float, float, float]:
-    """Compute tax under new regime (AY 2024-25). Returns: (tax_before_cess, cess_4pct, total_tax)"""
-    ti = max(0.0, float(ti))
-    tax_before_cess = 0.0
-    if ti > 300000:
-        tax_before_cess += min(400000, ti - 300000) * 0.05
-    if ti > 700000:
-        tax_before_cess += min(300000, ti - 700000) * 0.10
-    if ti > 1000000:
-        tax_before_cess += min(200000, ti - 1000000) * 0.15
-    if ti > 1200000:
-        tax_before_cess += min(300000, ti - 1200000) * 0.20
-    if ti > 1500000:
-        tax_before_cess += (ti - 1500000) * 0.30
-    
-    tax_before_cess = round(tax_before_cess, 2)
-    cess_4pct = round(tax_before_cess * 0.04, 2)
-    total_tax = round(tax_before_cess + cess_4pct, 2)
-    
-    return (tax_before_cess, cess_4pct, total_tax)
+def _align_label_value(label: str, value: str, width: int = 20) -> str:
+    """Create aligned label : value with label padded to width."""
+    return f"{label[:width].ljust(width)} : {value}"
 
 
 class CalculationAgent:
-    def __init__(self, output_dir: str = OUTPUT_DIR):
-        self.output_dir = output_dir
-        os.makedirs(self.output_dir, exist_ok=True)
+    """Tax calculation agent matching exact Indian tax rules (AY 2025-26)"""
 
-    def _heuristic_extract(self, calc_result: Dict[str, Any]) -> Dict[str, Any]:
-        """Normalize input to core numeric fields"""
-        normalized = {
-            "name": None,
-            "pan": None,
-            "assessment_year": None,
-            "basic": 0.0,
-            "hra_received": 0.0,
-            "rent_paid": 0.0,
-            "gross_salary": 0.0,
-            "standard_deduction": 50000.0,  # default for salaried -> can be overridden by inputs
-            "professional_tax": 0.0,
-            "chapter_vi_a": {},  # dict of deductions like 80C,80D,80CCD etc
-            "total_deductions": 0.0,
-            "interest_income": 0.0,
-            "rental_income": 0.0,
-            "other_income": 0.0,
-            "tds": 0.0,
-            "period": {"from": None, "to": None}
-        }
-
-        # If consolidated shape
-        cons = calc_result.get("consolidated") if isinstance(calc_result, dict) and "consolidated" in calc_result else None
-        if cons:
-            s = cons.get("income_components", {}) or {}
-            d = cons.get("deductions", {}) or {}
-            normalized["name"] = cons.get("name") or normalized["name"]
-            normalized["pan"] = cons.get("pan") or normalized["pan"]
-            normalized["assessment_year"] = cons.get("assessment_year") or normalized["assessment_year"]
-            normalized["period"] = cons.get("period") or normalized["period"]
-
-            # common keys: Gross Salary, Basic, HRA, Net Salary, Taxable Income, Standard Deduction
-            for k, v in s.items():
-                kl = k.strip().lower()
-                if "gross" in kl and "total" not in kl:  # Exclude "Total Income"
-                    # CRITICAL: Use max() instead of sum() for gross salary
-                    normalized["gross_salary"] = max(normalized["gross_salary"], _to_number(v))
-                elif kl in ("basic", "basic salary", "basic pay"):
-                    normalized["basic"] = max(normalized["basic"], _to_number(v))
-                elif "hra" in kl and "hra exempt" not in kl:
-                    normalized["hra_received"] = max(normalized["hra_received"], _to_number(v))
-                elif "taxable" in kl or "total income" in kl:
-                    # CRITICAL: Don't add "Total Income" to other_income
-                    # handled downstream
-                    pass
-                elif "interest" in kl:
-                    # CRITICAL: Use max() instead of sum() for interest
-                    normalized["interest_income"] = max(normalized["interest_income"], _to_number(v))
-                elif "rent" in kl and "rent paid" in kl:
-                    normalized["rent_paid"] += _to_number(v)
-                elif "rental" in kl and "income" in kl:
-                    # Rental income - use max()
-                    normalized["rental_income"] = max(normalized["rental_income"], _to_number(v))
-                else:
-                    # CRITICAL: Only add to other_income if it's not a known income component
-                    # Skip: "Total Income", "Gross Salary", "Interest Income", etc.
-                    if kl not in ("total income", "gross salary", "interest income", "rental income", "other income"):
-                        val = _to_number(v)
-                        if val > 0 and val <= 10000000:  # Validate
-                            normalized["other_income"] = max(normalized["other_income"], val)
-
-            # CRITICAL: Extract deductions from consolidated.deductions
-            for k, v in d.items():
-                kl = k.strip().lower()
-                num = _to_number(v)
-                if "80c" in kl or "80 c" in kl:
-                    normalized["chapter_vi_a"]["80C"] = num
-                elif "80d" in kl:
-                    normalized["chapter_vi_a"]["80D"] = num
-                elif "80ccd" in kl:
-                    normalized["chapter_vi_a"]["80CCD"] = num
-                elif "professional tax" in kl or "prof tax" in kl:
-                    # CRITICAL: Extract professional tax from consolidated deductions
-                    normalized["professional_tax"] = num
-                elif "section 24" in kl or "house property" in kl or "house property interest" in kl:
-                    # CRITICAL: Extract Section 24 from consolidated deductions
-                    normalized["section_24_deduction"] = num
-                elif "standard deduction" in kl:
-                    normalized["standard_deduction"] = num
-                # Don't add other deductions to total_deductions here - it will be computed in _compute_tax_flow
-
-            normalized["tds"] = _to_number(cons.get("tds") or cons.get("tds_amount") or 0.0)
-
-        else:
-            # If calc_result is a single structured_data dict from DocumentAgent
-            if isinstance(calc_result, dict) and "structured_data" in calc_result:
-                s = calc_result.get("structured_data") or {}
-                ic = s.get("income_components", {}) or {}
-                d = s.get("deductions", {}) or {}
-                normalized["name"] = s.get("name") or normalized["name"]
-                normalized["pan"] = s.get("pan") or normalized["pan"]
-                normalized["assessment_year"] = s.get("assessment_year") or normalized["assessment_year"]
-                normalized["period"] = s.get("period") or normalized["period"]
-
-                for k, v in ic.items():
-                    kl = k.strip().lower()
-                    if "gross" in kl:
-                        normalized["gross_salary"] += _to_number(v)
-                    elif "basic" in kl:
-                        normalized["basic"] = _to_number(v)
-                    elif "hra" in kl:
-                        normalized["hra_received"] = _to_number(v)
-                    elif "net" in kl:
-                        normalized["net_salary"] = _to_number(v)
-                    elif "interest" in kl:
-                        normalized["interest_income"] += _to_number(v)
-                    else:
-                        normalized["other_income"] += _to_number(v)
-
-                for k, v in d.items():
-                    kl = k.strip().lower()
-                    num = _to_number(v)
-                    if "80c" in kl or "80 c" in kl:
-                        normalized["chapter_vi_a"]["80C"] = num
-                    elif "80d" in kl:
-                        normalized["chapter_vi_a"]["80D"] = num
-                    elif "80ccd" in kl:
-                        normalized["chapter_vi_a"]["80CCD"] = num
-                    else:
-                        normalized["total_deductions"] += num
-
-                normalized["tds"] = _to_number(s.get("tds_amount") or s.get("tds") or 0.0)
-            else:
-                # try to accept raw minimal dict
-                for k in normalized.keys():
-                    if isinstance(calc_result.get(k), (int, float, str)):
-                        normalized[k] = _to_number(calc_result.get(k, normalized[k]))
-
-        # CRITICAL: Don't finalize total_deductions here - it will be computed in _compute_tax_flow
-        # The _heuristic_extract should only collect raw values, not compute totals
-        # total_deductions will be computed as: standard_deduction + professional_tax + chapter_vi_a
-        # Keep normalized["total_deductions"] as is (it may contain other deductions from payslip)
-        # if gross salary empty but basic present, set gross ~ basic
-        if normalized["gross_salary"] == 0 and normalized["basic"]:
-            normalized["gross_salary"] = normalized["basic"]
-
-        return normalized
-
-    def _compute_tax_flow(self, core: Dict[str, Any], is_metro: bool = False) -> Dict[str, Any]:
-        """Complete tax flow calculation: Gross Total Income → Deductions → Exemptions → Tax"""
-        basic = _to_number(core.get("basic_salary") or core.get("basic", 0.0))
-        hra_received = _to_number(core.get("hra_received", 0.0))
-        rent_paid = _to_number(core.get("rent_paid", 0.0))
-        lta_received = _to_number(core.get("lta", 0.0))
-        gross_salary = _to_number(core.get("gross_salary", 0.0))
-        standard_ded = _to_number(core.get("standard_deduction", 50000.0))
-        # CRITICAL: Extract professional_tax from core (should be set from consolidated.deductions)
-        prof_tax = _to_number(core.get("professional_tax", 0.0))
-        # If still 0, try to get from deductions dict
-        if prof_tax == 0 and isinstance(core.get("deductions"), dict):
-            prof_tax = _to_number(core.get("deductions", {}).get("Professional Tax", 0))
+    def __init__(self, groq_api_key: Optional[str] = None):
+        # Tax constants for AY 2025-26
+        self.STANDARD_DEDUCTION = 50000.0
+        self.CESS_RATE = 0.04
         
-        interest = _to_number(core.get("interest_income", 0.0))
-        rental = _to_number(core.get("rental_income", 0.0))
-        capital_gains = _to_number(core.get("capital_gains", 0.0))
-        other = _to_number(core.get("other_income", 0.0))
-        
-        chapter_vi_a = core.get("chapter_vi_a", {}) or {}
-        deduction_80c = _to_number(chapter_vi_a.get("80C") or core.get("deduction_80c", 0.0))
-        deduction_80d = _to_number(chapter_vi_a.get("80D") or core.get("deduction_80d", 0.0))
-        deduction_80ccd = _to_number(chapter_vi_a.get("80CCD") or core.get("deduction_80ccd", 0.0))
-        deduction_80tta = _to_number(core.get("deduction_80tta", 0.0))
-        deduction_80g = _to_number(core.get("deduction_80g", 0.0))
-        tds = _to_number(core.get("tds", 0.0))
-
-        hra_exempt = compute_hra_exemption(basic, hra_received, rent_paid, is_metro=is_metro)
-        lta_exempt = compute_lta_exemption(lta_received, core.get("lta_exempt", lta_received))
-        children_edu_exempt = compute_children_education_exemption(_to_number(core.get("children_education_allowance", 0.0)))
-
-        gross_total = round(gross_salary + interest + rental + capital_gains + other, 2)
-
-        ch_80c_capped = min(deduction_80c, 150000.0)
-        ch_80d_capped = min(deduction_80d, 50000.0)
-        ch_80ccd_capped = min(deduction_80ccd, 50000.0)
-        ch_80tta_capped = min(deduction_80tta, 10000.0)
-        total_chapter_vi_a = round(ch_80c_capped + ch_80d_capped + ch_80ccd_capped + ch_80tta_capped + deduction_80g, 2)
-
-        section_24 = _to_number(core.get("section_24_deduction", 0.0))
-        if section_24 == 0 and isinstance(core.get("deductions"), dict):
-            section_24 = _to_number(
-                core.get("deductions", {}).get("Section 24 (House Property Interest)", 0) or
-                core.get("deductions", {}).get("Section 24", 0) or
-                core.get("deductions", {}).get("House Property Interest", 0) or
-                core.get("house_property_interest", 0)
-            )
-        section_24_capped = min(section_24, 200000.0)
-        
-        total_deductions_old = round(standard_ded + prof_tax + total_chapter_vi_a + section_24_capped, 2)
-        total_deductions_new = round(standard_ded, 2)
-        core["total_deductions"] = total_deductions_old
-
-        total_exemptions = hra_exempt + lta_exempt + children_edu_exempt
-        taxable_old = max(0.0, gross_total - total_exemptions - total_deductions_old)
-        taxable_new = max(0.0, gross_total - total_deductions_new)
-
-        # compute tax for both regimes
-        tax_old_before_cess, cess_old, tax_old = compute_tax_old_regime(taxable_old)
-        tax_new_before_cess, cess_new, tax_new = compute_tax_new_regime(taxable_new)
-
-        rebate_old = rebate_new = 0.0
-        if taxable_old <= 500000:
-            rebate_old = min(tax_old_before_cess, 12500.0)
-            tax_old_before_cess = max(0.0, tax_old_before_cess - rebate_old)
-            cess_old = round(tax_old_before_cess * 0.04, 2)
-            tax_old = round(tax_old_before_cess + cess_old, 2)
-        if taxable_new <= 500000:
-            rebate_new = min(tax_new_before_cess, 12500.0)
-            tax_new_before_cess = max(0.0, tax_new_before_cess - rebate_new)
-            cess_new = round(tax_new_before_cess * 0.04, 2)
-            tax_new = round(tax_new_before_cess + cess_new, 2)
-
-        chosen_regime = "new" if tax_new <= tax_old else "old"
-        chosen_tax = min(tax_new, tax_old)
-        tax_due_raw = round(max(0.0, chosen_tax - tds), 2)
-        refund_raw = round(max(0.0, tds - chosen_tax), 2)
-
-        breakdown = {
-            "basic": round(basic, 2),
-            "hra_received": round(hra_received, 2),
-            "lta_received": round(lta_received, 2),
-            "gross_salary": round(gross_salary, 2),
-            "hra_exempt": round(hra_exempt, 2),
-            "lta_exempt": round(lta_exempt, 2),
-            "children_education_exempt": round(children_edu_exempt, 2),
-            "total_exemptions": round(total_exemptions, 2),
-            "rent_paid": round(rent_paid, 2),
-            "gross_total_income": round(gross_total, 2),
-            "income_breakdown": {
-                "salary": round(gross_salary, 2),
-                "interest": round(interest, 2),
-                "rental": round(rental, 2),
-                "capital_gains": round(capital_gains, 2),
-                "other": round(other, 2)
-            },
-            "standard_deduction": round(standard_ded, 2),
-            "professional_tax": round(prof_tax, 2),
-            "chapter_vi_a": {
-                "80C": round(deduction_80c, 2),
-                "80C_capped": round(ch_80c_capped, 2),
-                "80D": round(deduction_80d, 2),
-                "80D_capped": round(ch_80d_capped, 2),
-                "80CCD": round(deduction_80ccd, 2),
-                "80CCD_capped": round(ch_80ccd_capped, 2),
-                "80TTA": round(deduction_80tta, 2),
-                "80TTA_capped": round(ch_80tta_capped, 2),
-                "80G": round(deduction_80g, 2),
-                "total_chapter_vi_a": round(total_chapter_vi_a, 2)
-            },
-            "total_deductions": round(total_deductions_old, 2),
-            "total_deductions_new": round(total_deductions_new, 2),
-            "section_24_deduction": round(section_24_capped, 2),
-            "tds_total": round(tds, 2)
-        }
-
-        result = {
-            "taxable_old": round(taxable_old, 2),
-            "taxable_new": round(taxable_new, 2),
-            "tax_old_before_cess": round(tax_old_before_cess, 2),
-            "cess_old_4pct": round(cess_old, 2),
-            "tax_old": round(tax_old, 2),
-            "tax_new_before_cess": round(tax_new_before_cess, 2),
-            "cess_new_4pct": round(cess_new, 2),
-            "tax_new": round(tax_new, 2),
-            "rebate_old": round(rebate_old, 2),
-            "rebate_new": round(rebate_new, 2),
-            "chosen_regime": chosen_regime,
-            "chosen_tax": round(chosen_tax, 2),
-            "tax_due": tax_due_raw,
-            "refund": refund_raw,
-            "breakdown": breakdown
-        }
-        return result
-
-    def process(self, calc_result: Dict[str, Any], is_metro: bool = False, save_json: bool = False) -> Dict[str, Any]:
-        """Main entry point. Accepts consolidated dict or single document result"""
-        core = self._heuristic_extract(calc_result)
-        taxflow = self._compute_tax_flow(core, is_metro=is_metro)
-        
-        if taxflow.get("breakdown", {}).get("professional_tax", 0) > 0:
-            core["professional_tax"] = taxflow["breakdown"]["professional_tax"]
-        if taxflow.get("breakdown", {}).get("section_24_deduction", 0) > 0:
-            core["section_24_deduction"] = taxflow["breakdown"]["section_24_deduction"]
-
-        out = {
-            "schema_version": "CALC_V1",
-            "pan": core.get("pan") or "UNKNOWN",
-            "taxpayer": {"name": core.get("name"), "pan": core.get("pan"), "assessment_year": core.get("assessment_year")},
-            "core_fields": core,
-            "calculation": taxflow,
-            "generated_on": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        }
-
-        # Remove zero values for cleaner output
-        out_cleaned = _remove_zero_values(out)
-
-        if save_json:
-            pan = (core.get("pan") or "UNKNOWN").replace("/", "_")
-            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-            fname = f"calculation_{pan}_{ts}.json"
-            path = os.path.join(self.output_dir, fname)
+        # Initialize Groq client for AI-powered regime reasoning
+        self.client = None
+        api_key = groq_api_key or os.getenv("GROQ_API_KEY")
+        if _HAS_GROQ and api_key:
             try:
-                with open(path, "w", encoding="utf-8") as f:
-                    json.dump(out_cleaned, f, indent=4, ensure_ascii=False)
-                out_cleaned["output_path"] = path
+                self.client = Groq(api_key=api_key)
+            except TypeError as e:
+                if "proxies" in str(e):
+                    import httpx
+                    self.client = Groq(api_key=api_key, http_client=httpx.Client())
             except Exception:
-                out_cleaned["output_path"] = None
+                self.client = None
 
-        return out_cleaned
+    def _to_float(self, v) -> float:
+        """Convert value to float safely, handling currency strings."""
+        try:
+            if isinstance(v, str):
+                v = v.replace(",", "").replace("₹", "").strip()
+            return float(v or 0.0)
+        except Exception:
+            return 0.0
+
+    def _extract_income(self, data: dict) -> float:
+        """Extract gross total income from various data structures."""
+        # Try direct key first
+        gross = self._to_float(data.get("gross_total_income", 0.0))
+        if gross > 0:
+            return gross
+
+        # Try nested income_components
+        inc_comp = data.get("income_components") or data.get("income", {})
+        if isinstance(inc_comp, dict):
+            gross = self._to_float(inc_comp.get("Total Income") or inc_comp.get("Total") or inc_comp.get("total_income"))
+            if gross > 0:
+                return gross
+
+        # Fallback: Sum individual components
+        return (self._to_float(data.get("salary", 0.0) or data.get("gross_salary", 0.0)) +
+                self._to_float(data.get("interest_income", 0.0)) +
+                self._to_float(data.get("rental_income", 0.0)) +
+                self._to_float(data.get("other_income", 0.0)))
+
+    def _extract_deductions(self, data: dict) -> dict:
+        """Extract and process all deductions with proper caps and combinations."""
+        ded_dict = data.get("deductions", {})
+        
+        # Extract deduction values (check both nested dict and top-level)
+        prof_tax = self._to_float(ded_dict.get("Professional Tax", 0.0) or data.get("professional_tax", 0.0))
+        deduction_80c = self._to_float(ded_dict.get("80C", 0.0) or data.get("deduction_80c", 0.0))
+        nps_employee = self._to_float(ded_dict.get("NPS", 0.0) or data.get("nps_employee", 0.0))
+        deduction_80d = self._to_float(ded_dict.get("80D", 0.0) or data.get("deduction_80d", 0.0))
+        deduction_80ccd = self._to_float(ded_dict.get("80CCD", 0.0) or data.get("deduction_80ccd", 0.0))
+        section_24 = self._to_float(ded_dict.get("Section 24 (House Property Interest)", 0.0) or data.get("section_24", 0.0))
+
+        # Combined 80C + 80CCD(1) cap = ₹1,50,000
+        combined_80c_80ccd1 = min(deduction_80c + nps_employee, 150000.0)
+        
+        # Additional NPS under 80CCD(1B) up to ₹50,000 (separate from 80C limit)
+        nps_consumed = max(0.0, min(nps_employee, max(0.0, 150000.0 - deduction_80c)))
+        nps_remaining = max(0.0, nps_employee - nps_consumed)
+        extra_nps_80ccd1b = min(nps_remaining, 50000.0)
+
+        return {
+            "professional_tax": prof_tax,
+            "80C_and_80CCD1": combined_80c_80ccd1,
+            "80CCD_1B_extra": extra_nps_80ccd1b,
+            "80D": deduction_80d,
+            "80CCD": deduction_80ccd,
+            "section_24": min(section_24, 200000.0)  # Cap at ₹2L
+        }
+
+    def process(self, data: dict) -> dict:
+        """
+        Main tax calculation process for AY 2025-26.
+        
+        Calculates tax under both Old and New regimes, selects optimal regime,
+        and generates AI-powered reasoning.
+        
+        Returns: Complete calculation dict with 2-decimal precision.
+        """
+        # Extract income and deductions
+        gross_total_income = round(self._extract_income(data), 2)
+        ded = self._extract_deductions(data)
+
+        # Calculate deductions for both regimes
+        old_deductions = (self.STANDARD_DEDUCTION + ded["professional_tax"] + 
+                         ded["80C_and_80CCD1"] + ded["80CCD_1B_extra"] + 
+                         ded["80D"] + ded["80CCD"] + ded["section_24"])
+        new_deductions = self.STANDARD_DEDUCTION  # New regime: Only Standard Deduction
+
+        # Calculate taxable income
+        taxable_old = max(0.0, gross_total_income - old_deductions)
+        taxable_new = max(0.0, gross_total_income - new_deductions)
+
+        # Calculate tax (before cess) using slab rates
+        tax_old_before_cess = self._tax_old_regime(taxable_old)
+        tax_new_before_cess = self._tax_new_regime(taxable_new)
+
+        # Apply 4% cess
+        cess_old = round(tax_old_before_cess * self.CESS_RATE, 2)
+        cess_new = round(tax_new_before_cess * self.CESS_RATE, 2)
+        tax_old = round(tax_old_before_cess + cess_old, 2)
+        tax_new = round(tax_new_before_cess + cess_new, 2)
+
+        # Calculate TDS, tax due, and refund (using both regimes for comparison)
+        tds = round(self._to_float(data.get("tds", 0.0)), 2)
+        tax_due_old = round(max(0.0, tax_old - tds), 2)
+        tax_due_new = round(max(0.0, tax_new - tds), 2)
+        refund_old = round(max(0.0, tds - tax_old), 2)
+        refund_new = round(max(0.0, tds - tax_new), 2)
+
+        # Let AI choose the optimal regime based on comprehensive analysis
+        # (not just simple tax comparison, but considers deductions, future planning, etc.)
+        ai_regime_choice = self._ai_choose_regime(
+            gross_total_income, taxable_old, taxable_new, 
+            tax_old, tax_new, old_deductions, new_deductions, tds
+        )
+        
+        # Use AI choice if available, otherwise fall back to simple comparison
+        if ai_regime_choice:
+            chosen_regime = ai_regime_choice.get("chosen_regime", "new" if tax_new <= tax_old else "old")
+            regime_reasoning = ai_regime_choice.get("reasoning", {})
+        else:
+            # Fallback: Simple comparison
+            chosen_regime = "new" if tax_new <= tax_old else "old"
+            regime_reasoning = self._get_regime_reasoning(
+                gross_total_income, taxable_old, taxable_new, 
+                tax_old, tax_new, chosen_regime, old_deductions, new_deductions
+            )
+        
+        final_tax = tax_new if chosen_regime == "new" else tax_old
+        tax_due = tax_due_new if chosen_regime == "new" else tax_due_old
+        refund = refund_new if chosen_regime == "new" else refund_old
+
+        return {
+            "gross_total_income": round(gross_total_income, 2),
+            "deductions_applied": {
+                "standard_deduction": round(self.STANDARD_DEDUCTION, 2),
+                "professional_tax": round(ded["professional_tax"], 2),
+                "80C_and_80CCD1_applied": round(ded["80C_and_80CCD1"], 2),
+                "80CCD_1B_extra_nps": round(ded["80CCD_1B_extra"], 2),
+                "80D": round(ded["80D"], 2),
+                "other_80CCD": round(ded["80CCD"], 2),
+                "section_24": round(ded["section_24"], 2),
+                "total_old_deductions": round(old_deductions, 2),
+                "total_new_deductions": round(new_deductions, 2),
+            },
+            "taxable_income_old": round(taxable_old, 2),
+            "taxable_income_new": round(taxable_new, 2),
+            "tax_old": round(tax_old, 2),
+            "tax_new": round(tax_new, 2),
+            "chosen_regime": chosen_regime,
+            "final_tax": round(final_tax, 2),
+            "tds": tds,
+            "tax_due": tax_due,
+            "refund": refund,
+            "regime_reasoning": regime_reasoning,
+            "calculation_explanation": self._get_calculation_explanation(
+                gross_total_income, taxable_old, taxable_new, tax_old, tax_new, 
+                old_deductions, new_deductions, ded["professional_tax"], tds, tax_due, refund
+            ),
+            "generated_on": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+
+    def _tax_old_regime(self, income: float) -> float:
+        """
+        OLD REGIME tax calculation (before cess) - Progressive slab system:
+        - 0-2.5L: 0%
+        - 2.5-5L: 5%
+        - 5-10L: 20%
+        - 10L+: 30%
+        """
+        if income <= 250000:
+            return 0.0
+        
+        tax = 0.0
+        if income > 250000:
+            tax += (min(income, 500000) - 250000) * 0.05
+        if income > 500000:
+            tax += (min(income, 1000000) - 500000) * 0.20
+        if income > 1000000:
+            tax += (income - 1000000) * 0.30
+        
+        return round(tax, 2)
+
+    def _tax_new_regime(self, income: float) -> float:
+        """
+        NEW REGIME tax calculation (before cess) - Post-2023 slabs:
+        - 0-3L: 0%, 3-6L: 5%, 6-9L: 10%, 9-12L: 15%, 12-15L: 20%, 15L+: 30%
+        """
+        if income <= 0:
+            return 0.0
+        
+        slabs = [
+            (300000, 0.00), (600000, 0.05), (900000, 0.10),
+            (1200000, 0.15), (1500000, 0.20), (float("inf"), 0.30)
+        ]
+        
+        tax = 0.0
+        prev_limit = 0.0
+        
+        for limit, rate in slabs:
+            if income > prev_limit:
+                taxable = min(income, limit) - prev_limit
+                tax += taxable * rate
+                if income <= limit:
+                    break
+            prev_limit = limit
+        
+        return round(tax, 2)
+
+    def _ai_choose_regime(self, gross_income: float, taxable_old: float, taxable_new: float,
+                         tax_old: float, tax_new: float, old_ded: float, new_ded: float, tds: float) -> Optional[Dict[str, Any]]:
+        """
+        Let AI choose the optimal tax regime based on comprehensive analysis.
+        Considers not just tax amount, but deductions, future planning, investment opportunities, etc.
+        Returns None if AI unavailable, triggering fallback to simple comparison.
+        """
+        if not self.client:
+            return None
+        
+        try:
+            prompt = f"""You are an expert Chartered Accountant helping a client choose between Old and New tax regimes for AY 2025-26.
+
+FINANCIAL DATA:
+- Gross Total Income: ₹{gross_income:,.2f}
+- Old Regime Deductions: ₹{old_ded:,.2f} (includes Professional Tax, 80C, 80D, etc.)
+- New Regime Deductions: ₹{new_ded:,.2f} (Standard Deduction only)
+- Taxable Income (Old): ₹{taxable_old:,.2f}
+- Taxable Income (New): ₹{taxable_new:,.2f}
+- Tax Liability (Old): ₹{tax_old:,.2f}
+- Tax Liability (New): ₹{tax_new:,.2f}
+- TDS Already Paid: ₹{tds:,.2f}
+- Tax Due (Old): ₹{max(0.0, tax_old - tds):,.2f}
+- Tax Due (New): ₹{max(0.0, tax_new - tds):,.2f}
+- Savings (Old vs New): ₹{abs(tax_old - tax_new):,.2f}
+
+ANALYSIS REQUIRED:
+1. Compare tax liabilities under both regimes
+2. Consider deduction benefits (Old regime allows more deductions)
+3. Consider future investment planning (Old regime incentivizes investments)
+4. Consider simplicity (New regime is simpler, no investment tracking)
+5. Consider income level and tax bracket impact
+6. Make a professional recommendation
+
+Return JSON with your choice and reasoning:
+{{
+  "chosen_regime": "old" or "new",
+  "reasoning": {{
+    "recommended_regime": "OLD" or "NEW",
+    "reasoning": "Brief 2-3 sentence explanation of why this regime is better",
+    "detailed_analysis": "Detailed explanation covering: 1) Tax comparison, 2) Deduction benefits, 3) Future planning considerations, 4) Recommendation",
+    "key_factors": ["Factor 1", "Factor 2", "Factor 3"],
+    "savings_amount": {abs(tax_old - tax_new):.2f},
+    "considerations": ["Consideration 1", "Consideration 2"]
+  }}
+}}
+
+Be professional, clear, and consider all factors - not just the tax amount, but also long-term financial planning."""
+            
+            response = self.client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {"role": "system", "content": "You are an expert Chartered Accountant. Analyze comprehensively and choose the best regime. Return only valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.2,
+                max_tokens=1000
+            )
+            
+            # Parse JSON from response
+            raw = response.choices[0].message.content.strip()
+            cleaned = raw.replace("```json", "").replace("```", "").strip()
+            start, end = cleaned.find("{"), cleaned.rfind("}") + 1
+            
+            if start != -1 and end > start:
+                result = json.loads(cleaned[start:end])
+                # Validate chosen_regime
+                if result.get("chosen_regime") in ["old", "new"]:
+                    return result
+        except Exception:
+            pass
+        return None
+
+    def _get_regime_reasoning(self, gross_income: float, taxable_old: float, taxable_new: float,
+                             tax_old: float, tax_new: float, chosen: str, 
+                             old_ded: float, new_ded: float) -> Dict[str, Any]:
+        """
+        Get AI-powered reasoning for regime selection.
+        Falls back to rule-based reasoning if AI client unavailable.
+        """
+        if not self.client:
+            # Fallback: Rule-based reasoning without AI
+            savings = abs(tax_old - tax_new)
+            return {
+                "recommended_regime": chosen.upper(),
+                "reasoning": f"Based on calculations, {chosen.upper()} regime results in lower tax liability. "
+                           f"Tax under Old Regime: ₹{tax_old:,.2f}, Tax under New Regime: ₹{tax_new:,.2f}. "
+                           f"Savings by choosing {chosen.upper()} regime: ₹{savings:,.2f}.",
+                "detailed_analysis": f"Old Regime allows deductions of ₹{old_ded:,.2f} including Professional Tax, "
+                                    f"while New Regime allows only ₹{new_ded:,.2f} (Standard Deduction). "
+                                    f"Despite fewer deductions, New Regime's lower tax slabs result in lower tax."
+            }
+        
+        # AI-powered reasoning using Groq API
+        try:
+            prompt = f"""You are a Chartered Accountant providing tax regime selection advice.
+
+FINANCIAL SUMMARY:
+- Gross Total Income: ₹{gross_income:,.2f}
+- Old Regime Deductions: ₹{old_ded:,.2f} (includes Professional Tax ₹{old_ded - 50000:,.2f})
+- New Regime Deductions: ₹{new_ded:,.2f} (Standard Deduction only)
+- Taxable Income (Old): ₹{taxable_old:,.2f}
+- Taxable Income (New): ₹{taxable_new:,.2f}
+- Tax Liability (Old): ₹{tax_old:,.2f}
+- Tax Liability (New): ₹{tax_new:,.2f}
+- Recommended Regime: {chosen.upper()}
+
+Provide professional CA-style reasoning in JSON format:
+{{
+  "recommended_regime": "{chosen.upper()}",
+  "reasoning": "Brief 2-3 sentence explanation of why this regime is better",
+  "detailed_analysis": "Detailed explanation covering: 1) Why deductions differ, 2) Impact of tax slabs, 3) Net savings, 4) Recommendation",
+  "key_factors": ["Factor 1", "Factor 2", "Factor 3"],
+  "savings_amount": {abs(tax_old - tax_new):.2f}
+}}
+
+Be professional, clear, and concise like a CA would explain to a client."""
+            
+            response = self.client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {"role": "system", "content": "You are a Chartered Accountant providing tax advice. Return only valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.2,
+                max_tokens=800
+            )
+            
+            # Parse JSON from response (handle code fences)
+            raw = response.choices[0].message.content.strip()
+            cleaned = raw.replace("```json", "").replace("```", "").strip()
+            start, end = cleaned.find("{"), cleaned.rfind("}") + 1
+            
+            if start != -1 and end > start:
+                return json.loads(cleaned[start:end])
+        except Exception:
+            pass
+        
+        # Final fallback if AI parsing fails
+        savings = abs(tax_old - tax_new)
+        return {
+            "recommended_regime": chosen.upper(),
+            "reasoning": f"{chosen.upper()} regime is recommended as it results in lower tax liability of ₹{tax_new if chosen == 'new' else tax_old:,.2f} compared to ₹{tax_old if chosen == 'new' else tax_new:,.2f}.",
+            "detailed_analysis": f"Old Regime allows ₹{old_ded:,.2f} in deductions (including Professional Tax), while New Regime allows only ₹{new_ded:,.2f}. However, New Regime's lower tax slabs offset the deduction advantage, resulting in ₹{savings:,.2f} savings.",
+            "key_factors": ["Tax slab differences", "Deduction availability", "Net tax liability"],
+            "savings_amount": round(savings, 2)
+        }
+
+    def _get_calculation_explanation(self, gross: float, taxable_old: float, taxable_new: float,
+                                    tax_old: float, tax_new: float, old_ded: float, 
+                                    new_ded: float, prof_tax: float, tds: float, tax_due: float, refund: float) -> str:
+        """Generate CA-style calculation explanation in markdown format."""
+        return f"""**Tax Calculation Breakdown (AY 2025-26):**
+
+**1. Income Summary:**
+- Gross Total Income: ₹{gross:,.2f}
+
+**2. Deductions Applied:**
+
+*Old Regime:*
+- Standard Deduction: ₹50,000.00
+- Professional Tax: ₹{prof_tax:,.2f}
+- Total Deductions: ₹{old_ded:,.2f}
+- Taxable Income: ₹{taxable_old:,.2f}
+
+*New Regime:*
+- Standard Deduction: ₹50,000.00
+- Professional Tax: Not allowed
+- Total Deductions: ₹{new_ded:,.2f}
+- Taxable Income: ₹{taxable_new:,.2f}
+
+**3. Tax Computation:**
+
+*Old Regime Tax:*
+- Tax on ₹{taxable_old:,.2f} = ₹{tax_old:,.2f} (including 4% cess)
+
+*New Regime Tax:*
+- Tax on ₹{taxable_new:,.2f} = ₹{tax_new:,.2f} (including 4% cess)
+
+**4. Final Tax Position:**
+- TDS Already Paid: ₹{tds:,.2f}
+- Tax Due: ₹{tax_due:,.2f}
+- Refund: ₹{refund:,.2f}
+
+*Note: Calculations follow Income Tax Act provisions for AY 2025-26.*"""
+
+    def generate_report(self, calc_result: Dict[str, Any], consolidated_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Generate formatted text report from calculation result."""
+        # Extract profile from consolidated data
+        consolidated = consolidated_data or {}
+        name = consolidated.get("name") or "UNKNOWN"
+        pan = consolidated.get("pan") or "UNKNOWN"
+        ay = consolidated.get("assessment_year") or "N/A"
+        income_components = consolidated.get("income_components", {}) or {}
+        deductions = consolidated.get("deductions", {}) or {}
+        
+        # Build summary lines
+        lines: List[str] = []
+        lines.append("=" * 50 + " TAX SUMMARY " + "=" * 50)
+        lines.append(_align_label_value("Name", name, 20))
+        lines.append(_align_label_value("PAN", pan, 20))
+        lines.append(_align_label_value("Assessment Year", ay, 20))
+        lines.append("-" * 110)
+        lines.append(_align_label_value("GROSS TOTAL INCOME", _fmt_inr(calc_result.get("gross_total_income", 0)), 20))
+        lines.append(_align_label_value("TAXABLE (OLD)", _fmt_inr(calc_result.get("taxable_income_old", 0)), 20))
+        lines.append(_align_label_value("TAXABLE (NEW)", _fmt_inr(calc_result.get("taxable_income_new", 0)), 20))
+        lines.append("-" * 110)
+        lines.append(_align_label_value("TAX (OLD)", _fmt_inr(calc_result.get("tax_old", 0)), 20))
+        lines.append(_align_label_value("TAX (NEW)", _fmt_inr(calc_result.get("tax_new", 0)), 20))
+        lines.append(_align_label_value("CHOSEN REGIME", (calc_result.get("chosen_regime", "N/A") or "N/A").upper(), 20))
+        lines.append("-" * 110)
+        lines.append(_align_label_value("TDS", _fmt_inr(calc_result.get("tds", 0)), 20))
+        lines.append(_align_label_value("TAX DUE", _fmt_inr(calc_result.get("tax_due", 0)), 20))
+        lines.append("=" * 110)
+        lines.append("")
+        
+        # Income breakdown
+        lines.append("INCOME BREAKDOWN")
+        if income_components:
+            for k, v in income_components.items():
+                if k != "Total Income" and isinstance(v, (int, float)) and v > 0:
+                    lines.append(f" - {k.ljust(18)} : {_fmt_inr(float(v))}")
+        else:
+            lines.append(" - No income components found.")
+        
+        lines.append("")
+        
+        # Deductions
+        lines.append("DEDUCTIONS")
+        if deductions:
+            for k, v in deductions.items():
+                if k != "Total Deductions" and isinstance(v, (int, float)) and v > 0:
+                    lines.append(f" - {k.ljust(18)} : {_fmt_inr(float(v))}")
+        else:
+            lines.append(" - No deductions reported.")
+        
+        lines.append("=" * 110)
+        lines.append("")
+        
+        # Add reasoning
+        lines.append("REASONING:")
+        if calc_result.get("regime_reasoning"):
+            reasoning = calc_result["regime_reasoning"]
+            if reasoning.get("reasoning"):
+                lines.append(f"• {reasoning.get('reasoning')}")
+            if reasoning.get("detailed_analysis"):
+                lines.append(f"• {reasoning.get('detailed_analysis')}")
+        
+        if calc_result.get("calculation_explanation"):
+            lines.append("• Calculation follows Income Tax Act provisions for AY 2025-26")
+        
+        summary_text = "\n".join(lines)
+        
+        return {
+            "summary_text": summary_text,
+            "summary_lines": lines,
+            "summary_map": {
+                "name": name,
+                "pan": pan,
+                "assessment_year": ay,
+                "gross_total_income": calc_result.get("gross_total_income", 0.0),
+                "taxable_income_old": calc_result.get("taxable_income_old", 0.0),
+                "taxable_income_new": calc_result.get("taxable_income_new", 0.0),
+                "tax_old": calc_result.get("tax_old", 0.0),
+                "tax_new": calc_result.get("tax_new", 0.0),
+                "chosen_regime": (calc_result.get("chosen_regime") or "").upper(),
+                "final_tax": calc_result.get("final_tax", 0.0),
+                "tds": calc_result.get("tds", 0.0),
+                "tax_due": calc_result.get("tax_due", 0.0),
+                "refund": calc_result.get("refund", 0.0),
+                "income_components": income_components,
+                "deductions": deductions,
+                "generated_on": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+        }

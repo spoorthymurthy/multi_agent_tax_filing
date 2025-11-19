@@ -1,0 +1,34 @@
+{
+  "taxpayer": {
+    "name": "PURA KALPANA",
+    "pan": "BNNPK7568J",
+    "assessment_year": "202425",
+    "profile": {
+      "name": "PURA KALPANA",
+      "pan": "BNNPK7568J",
+      "assessment_year": "202425",
+      "address": null,
+      "sources": [
+        "AIS",
+        "Payslip"
+      ]
+    }
+  },
+  "income": {
+    "gross_total_income": 2039220.0,
+    "taxable_income": 1989220.0
+  },
+  "tax": {
+    "tax_old": 425636.64,
+    "tax_new": 308636.64,
+    "chosen_regime": "new",
+    "final_tax": 308636.64,
+    "tds": 290000.0,
+    "tax_due": 18636.640000000014,
+    "refund": 0.0
+  },
+  "metadata": {
+    "generated_on": "2025-11-18 15:25:04",
+    "source": "AI-Multi-Agent-FilingAgent"
+  }
+}
